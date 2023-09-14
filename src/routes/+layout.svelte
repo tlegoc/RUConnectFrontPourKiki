@@ -4,3 +4,4 @@
 <svelte:head>
 	<link rel='stylesheet' href={tabler}/>
 </svelte:head>
+<slot/>
