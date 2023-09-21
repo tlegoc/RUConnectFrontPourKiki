@@ -1,13 +1,19 @@
 <script>
+	import tabler from 'yesvelte/css/tabler.min.css?url'
 	import Header from '../components/Header.svelte'
+	import Footer from '../components/Footer.svelte'
 </script>
 
 <svelte:head>
-	<Header/>
-	<h1 class="title">RU CONNECT</h1>
+	<link rel='stylesheet' href={tabler}/>
 </svelte:head>
 
+<Header/>
+<Footer/>
 <slot/>
+
+
+
 <style>
 	@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&family=Roboto:wght@100&display=swap');
 
