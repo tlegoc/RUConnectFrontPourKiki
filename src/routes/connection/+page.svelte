@@ -8,7 +8,7 @@
     </script>
     <main>
 
-    <div style="margin-left: 20vw; margin-right: 20vw; margin-top:15vh;" class="center">
+    <div class="connexion">
         <h1 class="title">Connexion</h1>
         <FormInput {state} {hint} label="Email" placeholder="Enter your email...">
             <Icon slot="start-icon" name="mail" />
@@ -26,3 +26,23 @@
         </Button>
     </div>
 </main>
+
+<style>
+    @media screen and (min-width: 1000px) {
+        .connexion{
+            margin-left: 40vw; 
+            margin-right: 40vw;
+            margin-top:15vh;
+            text-align: center;
+        }
+    }
+
+    @media screen and (max-width: 1000px) {
+        .connexion{
+            margin-left: 20vw; 
+            margin-right: 20vw;
+            margin-top:15vh;
+            text-align: center;
+        }
+    }
+</style>
