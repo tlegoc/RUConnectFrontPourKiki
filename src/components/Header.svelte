@@ -3,10 +3,12 @@
 </script>
 
 <header>
+        <!-- svelte-ignore a11y-missing-attribute -->
         <img src="/logo.png"  class="logo" />
         <span class="avatar">
             <Dropdown arrow={false} style="background:none">
-            <Avatar>
+            <Avatar size="md" shape="circle">
+                <!-- svelte-ignore a11y-missing-attribute -->
                 <img src="/avatar.png"/>
             </Avatar>
             <DropdownMenu>
@@ -29,12 +31,6 @@
         top: 0px;
         width: 100%;
     }
-    h1{
-        font-family: 'Poppins', sans-serif;
-        font-weight: 400;
-        text-align: center;
-        font-size: xx-large;
-    }
     .logo{
         display: block;
         margin-left: auto;
@@ -45,7 +41,7 @@
         position: absolute;
         top: 0px;
         right: 0px;
-        padding: 35px;
+        padding: 25px;
         width: 100px;
     }
 
