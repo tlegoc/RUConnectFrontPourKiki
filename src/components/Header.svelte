@@ -3,10 +3,10 @@
 </script>
 
 <header>
-        <!-- svelte-ignore a11y-missing-attribute -->
-        <img src="/logo.png"  class="logo" />
-        <span class="avatar">
-            <Dropdown arrow={false} style="background:none">
+    <!-- svelte-ignore a11y-missing-attribute -->
+    <img src="/logo.png"  class="logo" />
+    <span class="avatar">
+        <Dropdown arrow={false} style="background:none">
             <Avatar size="md" shape="circle">
                 <!-- svelte-ignore a11y-missing-attribute -->
                 <img src="/avatar.png"/>
@@ -27,7 +27,8 @@
     header{
         padding: 10px;
         background: #eeeeee;
-        position: absolute;
+        position: relative;
+        display: block;
         top: 0px;
         width: 100%;
     }

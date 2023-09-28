@@ -1,11 +1,11 @@
-<header>
+<footer>
     <h3 class="title">© RU Connect 2023</h3>
-</header>
+</footer>
 
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400&family=Roboto:wght@100&display=swap');
 
-    header{
+    footer{
         padding: 10px;
         height: 7vh;
         background: #eeeeee;

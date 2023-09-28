@@ -9,8 +9,9 @@
 </svelte:head>
 
 <Header/>
-<Footer/>
 <slot/>
+<Footer/>
+
 
 
 
@@ -27,4 +28,9 @@
 		text-align: center;
         font-size: xx-large;
 	}
+	:global(main){
+		margin-top: 20px;
+		position: relative;
+	}
+
 </style>
