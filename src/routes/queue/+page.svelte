@@ -30,8 +30,9 @@
     };
 </script>
 
+<main>
 
-
+<h1> Temps de queue dans les RU les plus proches</h1>
 <TempsQueue 
             data={nbrQueue}
             nomRU="Astrolabe"
@@ -41,3 +42,6 @@
             data={nbrQueue2}
             nomRU="INSA"
             time={currentTime}/>
+        
+        
+</main>

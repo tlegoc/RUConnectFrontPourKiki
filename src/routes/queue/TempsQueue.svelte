@@ -5,7 +5,9 @@
     import TimeScale from "./TimeScale.svelte";
     export var nomRU;
     export var data;
-    let currentTime = 30;
+    let currentTime = 11.789;
+    let width;
+    $: time = ((currentTime-11.25)/2.5)*width;
     const keys = Object.keys(data);
     const values = Object.values(data);
 
@@ -29,17 +31,23 @@
 
 <Card title={nomRU}>
 	<CardBody>Temps de queue
+        <div
+        class="chart-container"
+        bind:clientWidth={width}
+        >
+        <svg {width} height=15>
+            <polygon points="{time-4},0 {time},15 {time+4},0" />
+        </svg>
+        </div>
         <Progress>
             {#each hours as h,i}
                 <ProgressBar value={hours[i+1]-h} color={people[i]} />
             {/each}
         </Progress>
 
-        <Slider min={0} max={100} step={10}>
-            <SliderKnob bind:currentTime />
-        </Slider>
+        
 
-        <TimeScale width=1000 height=50></TimeScale>
+        <TimeScale width=1000 height=50 {currentTime}></TimeScale>
         
     </CardBody>
 </Card>
