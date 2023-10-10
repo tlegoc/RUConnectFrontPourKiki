@@ -54,21 +54,21 @@
 
 		<!-- First stand -->
 		<div id="stand_added0">
-			<Button class="button" color="green">
-				<a href="/add_meal/add_ingredients">Stand 1</a>
+			<Button class="button" color="blue">
+				<a href	="/add_meal/add_ingredients">Stand 1</a>
 			</Button>
 		</div>
 
 		<!-- Second stand -->
 		<div id="stand_added1">
-			<Button class="button" color="green">
+			<Button class="button" color="blue">
 				<a href="/add_meal/add_ingredients">Stand 2</a>
 			</Button>
 		</div>
 
 		<!-- Third stand -->
 		<div id="stand_added2">
-			<Button class="button" color="green">
+			<Button class="button" color="blue">
 				<a href="/add_meal/add_ingredients">Stand 3</a>
 			</Button>
 		</div>
@@ -103,5 +103,9 @@
 	}
 	div#stand_added2 {
 		display: none; /* Initially hide the third ingredient button */
+	}
+
+	a{
+		color: red;
 	}
 </style>
