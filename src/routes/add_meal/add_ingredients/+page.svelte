@@ -25,6 +25,8 @@
 
 	// Flag to indicate whether we are adding or modifying an ingredient
 	let modify = false
+
+	export let actualId;
 	
 	// Function to add an ingredient
 	function addIngredient() {
@@ -73,6 +75,7 @@
 <El container>
 	<El row rowCols="1">
 
+		<p>{actualId}</p>
 		<!-- First ingredient -->
 		<div id="food_added0">
 			<Button id="food_added0" class="button" color="green" on:click={() => (show = !show, modify = true, buttonCountModify = 0)}>

@@ -11,12 +11,10 @@
 	// Array to store ingredient buttons
 	let buttons = []
 
+	let actualId = ''
+
 	// ID for tracking the current ingredient being modified
 	let stand_id = ''
-
-	let showStand1 = false;
-	let showStand2 = false;
-	let showStand3 = false;
 	
 	// Function to add a stand
 	function addStand() {
@@ -54,22 +52,22 @@
 
 		<!-- First stand -->
 		<div id="stand_added0">
-			<Button class="button" color="blue">
-				<a href	="/add_meal/add_ingredients">Stand 1</a>
+			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added0")}>
+				Stand 1
 			</Button>
 		</div>
 
 		<!-- Second stand -->
 		<div id="stand_added1">
-			<Button class="button" color="blue">
-				<a href="/add_meal/add_ingredients">Stand 2</a>
+			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added1")}>
+				Stand 2
 			</Button>
 		</div>
 
 		<!-- Third stand -->
 		<div id="stand_added2">
-			<Button class="button" color="blue">
-				<a href="/add_meal/add_ingredients">Stand 3</a>
+			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added2")}>
+				Stand 3
 			</Button>
 		</div>
 
