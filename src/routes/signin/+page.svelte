@@ -1,10 +1,12 @@
 <script lang="ts">import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
-     let hint = "";
+    let hint = "";
     let hint2 = "";
+    let hint3 = "";
     let mdp = "";
     let state = void 0;
     let state2 = void 0;
-    let fill = [false,false];
+    let state3 = void 0;
+    let fill = [false,false,false];
     let disabled = true;
 
     const validateMail =(e)=> {
@@ -35,6 +37,19 @@
         isDisabled();
     }
 
+    const validateRepeatMDP =(e)=> {
+        if(e.target.value == mdp){
+            fill[2] = true;
+            state3=""
+            hint3 = ""
+        }else{
+            fill[2] = false;
+            state3="invalid"
+            hint3 = "Mot de passe pas identique"
+        }
+        isDisabled();
+    }
+
     function isDisabled(){
         disabled = !(fill.every(element => element === true));
     }
@@ -43,19 +58,20 @@
     <main>
 
     <div class="connexion">
-        <h1 class="title">Connexion</h1>
-        <FormInput on:blur={validateMail} {state} {hint} label="Email" placeholder="Entrez votre mail..."  required>
+        <h1 class="title">Créer mon compte</h1>
+        <FormInput on:blur={validateMail} {hint} {state} label="Email" placeholder="Entrez votre mail..." required>
             <Icon slot="start-icon" name="mail" />
         </FormInput>
         <FormInput type="password" on:blur={validateMDP} hint={hint2} state={state2} label="Mot de passe" required placeholder="Entrez votre mot de passe...">
             <Icon slot="start-icon" name="key" />
         </FormInput>
 
+        <FormInput type="password" on:blur={validateRepeatMDP} hint={hint3} state={state3} label="Répéter mot de passe" required placeholder="Entrez à nouveau votre mot de passe...">
+            <Icon slot="start-icon" name="key" />
+        </FormInput>
+
         <Button color="success" bind:disabled>
-            <Icon name="login" />Se connecter
-        </Button>
-        <Button href="/signin">
-            <Icon name="user-check" />Créer un compte
+            <Icon name="check" />Créer mon compte
         </Button>
     </div>
 </main>
@@ -63,8 +79,8 @@
 <style>
     @media screen and (min-width: 1000px) {
         .connexion{
-            margin-left: 40vw; 
-            margin-right: 40vw;
+            margin-left: 38vw; 
+            margin-right: 38vw;
             margin-top:15vh;
             text-align: center;
         }

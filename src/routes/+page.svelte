@@ -1,3 +1,3 @@
 <main>
-    <h1 class="title">HOOOOME</h1>
+    <h1 class="title">HOME</h1>
 </main>
