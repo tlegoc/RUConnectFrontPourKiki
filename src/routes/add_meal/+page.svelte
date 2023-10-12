@@ -52,21 +52,21 @@
 
 		<!-- First stand -->
 		<div id="stand_added0">
-			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added0")}>
+			<Button class="button" color="blue" href="/add_meal/add_ingredients" on:click={() => (actualId = "stand_added0")}>
 				Stand 1
 			</Button>
 		</div>
 
 		<!-- Second stand -->
 		<div id="stand_added1">
-			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added1")}>
+			<Button class="button" color="blue" href="/add_meal/add_ingredients" on:click={() => (actualId = "stand_added1")}>
 				Stand 2
 			</Button>
 		</div>
 
 		<!-- Third stand -->
 		<div id="stand_added2">
-			<Button class="button" color="blue" on:click={() => (window.location.assign("/add_meal/add_ingredients"), actualId = "stand_added2")}>
+			<Button class="button" color="blue" href="/add_meal/add_ingredients" on:click={() => (actualId = "stand_added2")}>
 				Stand 3
 			</Button>
 		</div>
@@ -101,9 +101,5 @@
 	}
 	div#stand_added2 {
 		display: none; /* Initially hide the third ingredient button */
-	}
-
-	a{
-		color: red;
 	}
 </style>

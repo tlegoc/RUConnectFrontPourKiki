@@ -1,6 +1,6 @@
 <script>
 	// Importing components from 'yesvelte'
-	import { Button, Icon, El, Offcanvas, OffcanvasBody, OffcanvasHeader, Autocomplete } from 'yesvelte'
+	import { Button, Icon, El, Offcanvas, OffcanvasBody, OffcanvasHeader, Autocomplete, Alert } from 'yesvelte'
 
 	// Boolean flag to control the visibility of the Offcanvas
 	let show = false
@@ -35,6 +35,7 @@
 		food_id = "food_added"
 		food_id += buttonCount // Generate a unique ID for the ingredient button
 		document.getElementById(food_id).style.display = "inline"; // Display the ingredient button
+		toggle();
 		buttonCount += 1 // Increment the button count
 		if(buttonCount == 3){
 			document.getElementById("food_add").style.display = "none"; // Hide the "Ajouter un ingrédient" button if 3 ingredients are added
