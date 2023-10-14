@@ -35,7 +35,6 @@
 		food_id = "food_added"
 		food_id += buttonCount // Generate a unique ID for the ingredient button
 		document.getElementById(food_id).style.display = "inline"; // Display the ingredient button
-		toggle();
 		buttonCount += 1 // Increment the button count
 		if(buttonCount == 3){
 			document.getElementById("food_add").style.display = "none"; // Hide the "Ajouter un ingrédient" button if 3 ingredients are added
