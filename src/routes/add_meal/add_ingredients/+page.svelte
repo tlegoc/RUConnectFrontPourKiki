@@ -1,6 +1,6 @@
 <script>
 	// Importing components from 'yesvelte'
-	import { Button, Icon, El, Offcanvas, OffcanvasBody, OffcanvasHeader, Autocomplete, Alert } from 'yesvelte'
+	import { Button, Icon, El, Offcanvas, OffcanvasBody, OffcanvasHeader, Autocomplete} from 'yesvelte'
 
 	// Boolean flag to control the visibility of the Offcanvas
 	let show = false
