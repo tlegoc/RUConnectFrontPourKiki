@@ -42,12 +42,14 @@
 	}
 
 	let openName = false;
-	function toggleName() {
+	function toggleName(class_name) {
 		openName = !openName;
 		if(openName){
-			document.getElementsByClassName("change_standName1")[0].style.display = "inline"
+			document.getElementsByClassName(class_name)[0].style.display = "inline"
+			document.getElementsByClassName(class_name+"Button")[0].style.display = "inline"
 		} else{
-			document.getElementsByClassName("change_standName1")[0].style.display = "none"
+			document.getElementsByClassName(class_name)[0].style.display = "none"
+			document.getElementsByClassName(class_name+"Button")[0].style.display = "none"
 		}
 	}
 
@@ -126,8 +128,11 @@
 
 			<!-- Stand 1 -->
 			<Label>Stand {name_stand1}
-				<Icon name="pencil" on:click={() =>(toggleName())}/>
-				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+				<Icon name="pencil" on:click={() =>(toggleName("change_standName1"))}/>
+					<input class="change_standName1" placeholder="Changez le nom du stand"/>
+					<Button class="change_standName1Button" color="green" on:click={() => (name_stand1=document.getElementsByClassName("change_standName1")[0].value, toggleName("change_standName1"))}>
+						<Icon name="check" />
+					</Button>
 			</Label>
 			{#each $Ingredient_id1 as idIngredient1 (idIngredient1)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient1, showCreate=false, showCreate_Ingredients())}>
@@ -149,9 +154,13 @@
 
 			<!-- Stand 2 -->
 			<Label>Stand {name_stand2}
-				<Icon name="pencil" on:click={() =>(toggleName())}/>
-				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+				<Icon name="pencil" on:click={() =>(toggleName("change_standName2"))}/>
+					<input class="change_standName2" placeholder="Changez le nom du stand"/>
+					<Button class="change_standName2Button" color="green" on:click={() => (name_stand2=document.getElementsByClassName("change_standName2")[0].value, toggleName("change_standName2"))}>
+						<Icon name="check" />
+					</Button>
 			</Label>
+
 			{#each $Ingredient_id2 as idIngredient2 (idIngredient2)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient2, showCreate=false, showCreate_Ingredients())}>
 					{idIngredient2}
@@ -172,9 +181,13 @@
 
 			<!-- Stand 3 -->
 			<Label>Stand {name_stand3}
-				<Icon name="pencil" on:click={() =>(toggleName())}/>
-				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+				<Icon name="pencil" on:click={() =>(toggleName("change_standName3"))}/>
+					<input class="change_standName3" placeholder="Changez le nom du stand"/>
+					<Button class="change_standName3Button" color="green" on:click={() => (name_stand3=document.getElementsByClassName("change_standName3")[0].value, toggleName("change_standName3"))}>
+						<Icon name="check" />
+					</Button>
 			</Label>
+
 			{#each $Ingredient_id3 as idIngredient3 (idIngredient3)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient3, showCreate=false, showCreate_Ingredients())}>
 					{idIngredient3}
@@ -199,7 +212,7 @@
 		<OffcanvasHeader title="Ajouter un ingrédient" />
 		<OffcanvasBody>
 			{#each items as item (item)}
-				<Button color="blue" on:click={() =>(open=false, value=item, makeIngredient(food_id, modifiedValue))}>
+				<Button color="blue" on:click={() =>(open=false, value=item, makeIngredient(modifiedValue))}>
 					{item}
 				</Button>
 			{/each}
@@ -223,6 +236,20 @@
 
 <style>
 	:global(.change_standName1){
+		display: none;
+	}
+	:global(.change_standName1Button){
+		display: none;
+	}
+	:global(.change_standName2){
+		display: none;
+	}
+	:global(.change_standName2Button){
+		display: none;
+	}:global(.change_standName3){
+		display: none;
+	}
+	:global(.change_standName3Button){
 		display: none;
 	}
 </style>
