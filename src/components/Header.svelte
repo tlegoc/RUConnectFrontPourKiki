@@ -12,9 +12,9 @@
                 <img src="/avatar.png"/>
             </Avatar>
             <DropdownMenu>
-                <DropdownItem>Mon profil</DropdownItem>
+                <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem>Déconnexion</DropdownItem>
+                <DropdownItem href="/connection">Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </span>
