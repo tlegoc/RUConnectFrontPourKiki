@@ -1,6 +1,6 @@
 <script>
 	// Importing components from 'yesvelte'
-	import { Button, Icon, El, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Floating, FormInput } from "yesvelte";
+	import { Button, Icon, El, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Floating, FormInput, Divider  } from "yesvelte";
 	import { writable } from "svelte/store";
 
 	// Actual value being modified
@@ -98,6 +98,9 @@
 </script>
 
 <main>
+
+	<Icon name="arrow-left" on:click={() => (window.location.href="/")}/>
+
 	<El container>
 		<El row>
 
@@ -119,6 +122,8 @@
 				</Button>
 			</div>
 
+			<Divider/>
+
 			<!-- Stand 2 -->
 			<Label>Stand 2</Label>
 			{#each $Ingredient_id2 as idIngredient2 (idIngredient2)}
@@ -136,6 +141,8 @@
 					<Icon name="plus" />Ajouter un Ingredient
 				</Button>
 			</div>
+
+			<Divider/>
 
 			<!-- Stand 3 -->
 			<Label>Stand 3</Label>
