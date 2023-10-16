@@ -1,6 +1,6 @@
 <script>
 	// Importing components from 'yesvelte'
-	import { Button, Icon, El, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Floating, FormInput, Divider  } from "yesvelte";
+	import { Button, Icon, El, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Floating, FormInput, Input, Divider, Alert  } from "yesvelte";
 	import { writable } from "svelte/store";
 
 	// Actual value being modified
@@ -29,8 +29,27 @@
 	let Ingredient_id2 = writable([]);
 	let Ingredient_id3 = writable([]);
 
+	let name_stand1 = "1"
+	let name_stand2 = "2"
+	let name_stand3 = "3"
+
 	// ID for tracking the current ingredient being modified for the Offcanvas
 	let food_id = writable([]);
+
+	let open = false;
+	function toggle() {
+  		open = !open;
+	}
+
+	let openName = false;
+	function toggleName() {
+		openName = !openName;
+		if(openName){
+			document.getElementsByClassName("change_standName1")[0].style.display = "inline"
+		} else{
+			document.getElementsByClassName("change_standName1")[0].style.display = "none"
+		}
+	}
 
 	// Function adding or changing ingredient
 	function makeIngredient(modifiedValue){
@@ -45,6 +64,7 @@
 	function addIngredient(idIngredient) {
 		idIngredient.update((IngredientIds) => {
 			if(!IngredientIds.includes(value)){
+				toggle()
 				return [...IngredientIds, value];
 			} else {
 				return IngredientIds;
@@ -105,7 +125,10 @@
 		<El row>
 
 			<!-- Stand 1 -->
-			<Label>Stand 1</Label>
+			<Label>Stand {name_stand1}
+				<Icon name="pencil" on:click={() =>(toggleName())}/>
+				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+			</Label>
 			{#each $Ingredient_id1 as idIngredient1 (idIngredient1)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient1, showCreate=false, showCreate_Ingredients())}>
 					{idIngredient1}
@@ -125,7 +148,10 @@
 			<Divider/>
 
 			<!-- Stand 2 -->
-			<Label>Stand 2</Label>
+			<Label>Stand {name_stand2}
+				<Icon name="pencil" on:click={() =>(toggleName())}/>
+				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+			</Label>
 			{#each $Ingredient_id2 as idIngredient2 (idIngredient2)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient2, showCreate=false, showCreate_Ingredients())}>
 					{idIngredient2}
@@ -145,7 +171,10 @@
 			<Divider/>
 
 			<!-- Stand 3 -->
-			<Label>Stand 3</Label>
+			<Label>Stand {name_stand3}
+				<Icon name="pencil" on:click={() =>(toggleName())}/>
+				<FormInput class="change_standName1" placeholder="Changez le nom du stand"/>
+			</Label>
 			{#each $Ingredient_id3 as idIngredient3 (idIngredient3)}
 				<Button color="blue" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient3, showCreate=false, showCreate_Ingredients())}>
 					{idIngredient3}
@@ -164,11 +193,13 @@
 		</El>
 	</El>
 
+	<Alert dismissible bind:open title="Vous avez ajouté {value}." color="success"/>
+
 	<Offcanvas placement="end" bind:show>   
 		<OffcanvasHeader title="Ajouter un ingrédient" />
 		<OffcanvasBody>
 			{#each items as item (item)}
-				<Button color="blue" on:click={() =>(value=item, makeIngredient(food_id, modifiedValue))}>
+				<Button color="blue" on:click={() =>(open=false, value=item, makeIngredient(food_id, modifiedValue))}>
 					{item}
 				</Button>
 			{/each}
@@ -182,10 +213,16 @@
 			<div id="add_toIngredients">
 				<Floating>
 					<FormInput id="createInput" placeholder="Créer un Ingredient" bind:value>
-						<Button slot="end" color="green" on:click={() =>(createIngredient())}>Envoyer</Button>
+						<Button slot="end" color="green" on:click={() =>(open=false, createIngredient())}>Envoyer</Button>
 					</FormInput>
 				</Floating>
 			</div>
 		</OffcanvasBody>
 	</Offcanvas>
 </main>
+
+<style>
+	:global(.change_standName1){
+		display: none;
+	}
+</style>
