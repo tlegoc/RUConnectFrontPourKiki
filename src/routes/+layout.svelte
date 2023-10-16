@@ -23,10 +23,27 @@
 	}
 	:global(.center){
 		text-align: center;
+		justify-content: center;
+		align-items: center;
 	}
 	:global(.title){
 		text-align: center;
         font-size: xx-large;
+	}
+	:global(.XS){
+		margin-top: 2%;
+	}
+	:global(.S){
+		margin-top: 5%;
+	}
+	:global(.M){
+		margin-top: 10%;
+	}
+	:global(.L){
+		margin-top: 20%;
+	}
+	:global(.flex){
+		display: flex;
 	}
 	:global(main){
 		margin-top: 20px;
