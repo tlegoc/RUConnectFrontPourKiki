@@ -84,6 +84,7 @@
 			addIngredient(food_id);
 			document.getElementById("add_toIngredients").style.display = "none";
 		}
+		value=""
 	}
 
 	// Function to display or not the input for creating ingredients
