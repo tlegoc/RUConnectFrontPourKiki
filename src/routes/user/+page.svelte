@@ -1,12 +1,6 @@
 <script>
-	import { Avatar, AvatarList, Icon, Input  } from 'yesvelte'
-    let value = "pseudo";
-    let width = value.length*15.5+"px";
-
-    const handleChange = val => {
-        value=val;
-        width = val.length*15.5+'px';
-  };
+    import {Avatar, AvatarList, Badge, Icon, Input} from 'yesvelte'
+    let value = "Pseudo";
 </script>
 
 <main>
@@ -14,31 +8,60 @@
     <div class="center">
     
     <span class="flex center XS">
-        <Avatar size="lg"shape="circle" style="margin-right:20px">
+        <Avatar size="md"shape="circle" style="margin-right:20px">
             <!-- svelte-ignore a11y-missing-attribute -->
-            <img src="/avatar.png"/>
+            Ps
         </Avatar>
-        <Input class="XS" value={value ?? "Pseudo"} size="lg" on:change={e => handleChange(e.target.value)} style="width:{width}; border-color:rgba(0,0,0,0); background: rgba(0,0,0,0);"/>
+        <input type="text" class="XS" value={value ?? "Pseudo"} size=5 oninput="this.size = this.value.length/1.7 +1" style="border-color:rgba(0,0,0,0); background: rgba(0,0,0,0); margin-bottom: 25px;"/>
         <Icon name="edit" style="margin-left:-1vw;"/>
     </span>
 
-    <div class="flex center XS">
+
         <h2 style="margin-right: 20px;">Mes amis</h2>
-        <AvatarList stacked mb="3">
-            <Avatar>
-                <img src="https://preview.tabler.io/static/avatars/000m.jpg" alt="" />
-            </Avatar>
-            <Avatar>
-                <img src="https://preview.tabler.io/static/avatars/002f.jpg" alt="" />
-            </Avatar>
-            <Avatar>
-                <Icon name="plus" />
-            </Avatar>
-        </AvatarList>
+        <div class="flex center XS">
+        <div style="margin-right: 10px">
+            <div>
+                <Badge pill ghost color="success" style="margin-right: 5px">Dans le RU</Badge>
+            </div>
+            <div style="margin-top: 25px; margin-bottom: 25px">
+                <Badge pill ghost color="warning" style="margin-right: 5px">Dans la queue</Badge>
+            </div>
+            <div>
+                <Badge pill ghost color="danger" style="margin-right: 5px">A faim</Badge>
+            </div>
+        </div>
+        <div>
+            <div class="flex friendList">
+                <Avatar class="friend" color="success">Re</Avatar>
+                <Avatar class="friend" color="success">Ju</Avatar>
+                <Avatar class="friend" color="success">Pi</Avatar>
+            </div>
+            <div class="flex friendList">
+
+                <Avatar class="friend" color="warning">Ar</Avatar>
+                <Avatar class="friend" color="warning">Ki</Avatar>
+                <Avatar class="friend" color="warning">Be</Avatar>
+                <Avatar class="friend" color="warning">Me</Avatar>
+
+            </div>
+            <div class="flex friendList">
+
+                <Avatar class="friend" color="danger">Ax</Avatar>
+                <Avatar class="friend" color="danger">Ol</Avatar>
+            </div>
+        </div>
+
+
     </div>
 </div>
 </main>
 
 <style>
+    :global(.friendList){
+        margin-bottom: 5px;
+    }
+    :global(.friend){
+        margin-left: -10px;
+    }
 
 </style>

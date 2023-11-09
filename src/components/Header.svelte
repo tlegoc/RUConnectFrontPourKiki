@@ -9,7 +9,7 @@
         <Dropdown arrow={false} style="background:none">
             <Avatar size="md" shape="circle">
                 <!-- svelte-ignore a11y-missing-attribute -->
-                <img src="/avatar.png"/>
+                Ps
             </Avatar>
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
