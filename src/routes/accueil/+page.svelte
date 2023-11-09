@@ -1,13 +1,6 @@
 <script>
 	import { Card, CardBody, CardTitle, CardMedia, El} from 'yesvelte'
-	import { goto } from '@app/navigation';
 	import { Button, ButtonGroup } from 'yesvelte'
-
-
-	function goTo() {
-		goto("/platSelect")
-	}
-	
 </script>
 
 
@@ -34,7 +27,9 @@
 
 <Card borderless>
 	<ButtonGroup vertical>
-		<Button>PLAT 1</Button>
+		<Button href = "/accueil/stands">
+			PLAT 1
+		</Button>
 		<Button>PLAT 2</Button>
 		<Button>PLAT 3</Button>
 	</ButtonGroup>
