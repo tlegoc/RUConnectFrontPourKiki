@@ -9,12 +9,12 @@
         <Dropdown arrow={false} style="background:none">
             <Avatar size="md" shape="circle">
                 <!-- svelte-ignore a11y-missing-attribute -->
-                <img src="/avatar.png"/>
+                Ps
             </Avatar>
             <DropdownMenu>
-                <DropdownItem>Mon profil</DropdownItem>
+                <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem>Déconnexion</DropdownItem>
+                <DropdownItem href="/connection">Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </span>
