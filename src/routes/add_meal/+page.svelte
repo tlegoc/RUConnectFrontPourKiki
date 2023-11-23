@@ -1,6 +1,6 @@
 <script>
 	// Importing components from 'yesvelte'
-	import { Button, Icon, El, Label, Offcanvas, OffcanvasBody, OffcanvasHeader, Floating, FormInput, Input, Divider, Alert  } from "yesvelte";
+	import { Button, Icon, El, Label,  Floating, FormInput, Divider, Modal, ModalBody } from "yesvelte";
 	import { writable } from "svelte/store";
 
 	// Actual value being modified
@@ -29,6 +29,7 @@
 	let Ingredient_id2 = writable([]);
 	let Ingredient_id3 = writable([]);
 
+	// Name of each Stand
 	let name_stand1 = "1"
 	let name_stand2 = "2"
 	let name_stand3 = "3"
@@ -36,11 +37,13 @@
 	// ID for tracking the current ingredient being modified for the Offcanvas
 	let food_id = writable([]);
 
+	// Function to toggle the visibility of the Modal
 	let open = false;
 	function toggle() {
   		open = !open;
 	}
 
+	// Function toggle the display of the input for changing the name of a stand
 	let openName = false;
 	function toggleName(class_name) {
 		openName = !openName;
@@ -120,10 +123,14 @@
 </script>
 
 <main>
+
+	<!-- Return to main page -->
 	<div class="flex center">
 		<Icon style="margin-bottom: 0.5em; margin-right: 0.6em;" size="2x" name="arrow-left" on:click={() => (window.location.href="/")}/>
 		<h1 class="title" style="margin-right: 1.6em;">Stands</h1>
 	</div>
+
+	<!-- Container of all stands -->
 	<El container>
 		<El row>
 
@@ -136,6 +143,8 @@
 						<Icon name="check" />
 					</Button>
 			</Label>
+
+			<!-- Display each ingredient of stand 1 -->
 			{#each $Ingredient_id1 as idIngredient1 (idIngredient1)}
 				<div class="flex center">
 					<Button class="ingredientBtn" color="info" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient1, showCreate=false, showCreate_Ingredients())}>
@@ -166,6 +175,7 @@
 					</Button>
 			</Label>
 
+			<!-- Display each ingredient of stand 2 -->
 			{#each $Ingredient_id2 as idIngredient2 (idIngredient2)}
 				<div class="flex center">
 					<Button class="ingredientBtn" color="info" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient2, showCreate=false, showCreate_Ingredients())}>
@@ -196,6 +206,7 @@
 					</Button>
 			</Label>
 
+			<!-- Display each ingredient of stand 3 -->
 			{#each $Ingredient_id3 as idIngredient3 (idIngredient3)}
 				<div class="flex center">
 					<Button class="ingredientBtn" color="info" on:click={() => (modify = true, show = !show, modifiedValue=idIngredient3, showCreate=false, showCreate_Ingredients())}>
@@ -216,13 +227,11 @@
 		</El>
 	</El>
 
-	<Alert dismissible bind:open title="Vous avez ajouté {value}." color="success"/>
-
-	<Offcanvas placement="end" bind:show>   
-		<OffcanvasHeader title="Ajouter un ingrédient" />
-		<OffcanvasBody class="center">
+	<!-- Modal displaying all possible ingredients to add to a stand and the create ingredient button -->
+	<Modal title="Ajoutez un ingrédient !" size="lg" autoClose backdrop={false} placement="center" bind:show>
+		<ModalBody class="center">
 			{#each items as item (item)}
-				<Button class="ingredientBtn" color="info" on:click={() =>(open=false, value=item, makeIngredient(modifiedValue))}>
+				<Button color="info" on:click={() =>(open=false, value=item, makeIngredient(modifiedValue))}>
 					{item}
 				</Button>
 				<br>
@@ -242,8 +251,9 @@
 					</FormInput>
 				</Floating>
 			</div>
-		</OffcanvasBody>
-	</Offcanvas>
+		</ModalBody>
+	</Modal>
+
 </main>
 
 <style>
@@ -263,10 +273,6 @@
 	}
 	:global(.change_standName3Button){
 		display: none;
-	}
-	:global(.ingredientBtn){
-		width: 130px;
-		margin-bottom:2px;
 	}
 
 </style>
