@@ -10,6 +10,6 @@
 
 
 <Card borderless>
-	<Button href = "/accueil">go back</Button>
+	<Button href = "../">go back</Button>
 	
 </Card>
