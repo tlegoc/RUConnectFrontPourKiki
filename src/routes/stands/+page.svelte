@@ -1,7 +1,8 @@
 <script>
 	import { Card, CardBody, CardTitle, CardMedia, El} from 'yesvelte'
 	import { Button, ButtonGroup } from 'yesvelte'
-
+	import stand from "./stand.svelte";
+	
 
 
 	
