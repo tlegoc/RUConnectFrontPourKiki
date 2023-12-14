@@ -1,10 +1,6 @@
 <script>
 	import { Card, CardBody, CardTitle, CardMedia, El, Icon } from 'yesvelte'
 	import { Button, ButtonGroup } from 'yesvelte'
-
-
-
-	
 </script>
 
 <!-- Return to main page -->
