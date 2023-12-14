@@ -23,12 +23,6 @@
 <Card title={nomRU}>
 	<CardBody>
         
-        <!--<Progress>
-            {#each hours as h,i}
-                <ProgressBar value={hours[i+1]-h} color={people[i]} />
-            {/each}
-        </Progress>-->
-        
        
         <div
         class="chart-container"

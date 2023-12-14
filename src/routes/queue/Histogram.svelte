@@ -41,7 +41,7 @@
 			x={xScale(tick)-width/20}
 			y={height-yScale(data[tick+10])}
 			fill={data[tick+10] === 4 ? "red" : data[tick+10] === 3 ? "orangeRed" : data[tick+10] === 2 ? "orange" : "green"} 
-            opacity=0.4/>
+            opacity=0.7/>
 
         {/each}
         <line x1=0 x2=0 y1=0 y2={height} stroke="black" /> 
