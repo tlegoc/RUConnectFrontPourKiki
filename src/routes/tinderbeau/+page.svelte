@@ -8,6 +8,8 @@
     let length = plats.length;
     let width;
     let i = 0;
+    let currentIndex = 0;
+
     function like(){
         if(i < length){
             bool[i] = true;
@@ -16,16 +18,24 @@
         
     }
     function dislike(){
+        console.log("dislike");
+        const card = document.getElementById(`card-${currentIndex}`);
+        card.style.transform = `translateX(40px) rotate(4}deg)`;
+        card.remove();
+        //card.style.visibility='hidden';
+        currentIndex += 1;
         if(i < length){
             bool[i] = false;
+            console.log(bool[i]);
         i++;
         }
         
     }
 
-    let currentIndex = 0;
+    
     let startX = 0;
     let isDragging = false;
+    let isThrowing = false;
 
     function handleStart(event) {
         startX = event.touches ? event.touches[0].clientX : event.clientX;
@@ -36,31 +46,33 @@
         if (isDragging) {
             const currentX = event.touches ? event.touches[0].clientX : event.clientX;
             const deltaX = currentX - startX;
+            console.log(currentIndex);
             const card = document.getElementById(`card-${currentIndex}`);
 
             if (card) {
                 card.style.transform = `translateX(${deltaX}px) rotate(${(deltaX / 10)}deg)`;
             }
-            if(currentX < width/5){
-                isDragging=false;
-                card.style.transform = `translateX(40px) rotate(4}deg)`;
-                card.remove;
-                card.style.visibility='hidden';
-                dislike();
-                currentIndex += 1;
-            }
+            
         }
     }
 
-    function handleEnd() {
+    function handleEnd(event) {
         if (isDragging) {
+            const currentX = event.touches ? event.touches[0].clientX : event.clientX;
             const card = document.getElementById(`card-${currentIndex}`);
 
-            if (card) {
+            /*if (card) {
                 card.style.transform = "translateX(0) rotate(0)";
-            }
+            }*/
 
             isDragging = false;
+            if(currentX < width/4){
+                card.style.transform = `translateX(40px) rotate(4}deg)`;
+                //card.remove();
+                //card.style.visibility='hidden';
+                dislike();
+                //currentIndex += 1;
+            }
         }
     }
 
@@ -99,21 +111,22 @@
     height: 100%;
     object-fit: cover;
     object-position: 50% 50%;
+    pointer-events: none; 
     }
     
 </style>
 
 <body>
     <h1>Tinder des plats</h1>
-    
+<!--    
 <Button shape="pill" color="red" size="lg" on:click={dislike}>
     <Icon name="x" color="dark"/>
-</Button>
+</Button>--> 
 
     <div role="tablist" class="chart-container"
     bind:clientWidth={width}>
     {#each plats as plat,i} 
-        <button 
+        <button
         bind:this={plat[i]}
         id={`card-${i}`}
         on:mousedown={handleStart}
@@ -126,10 +139,10 @@
     </div>
     
 
-
+<!--
 <Button shape="pill" color="green" size="lg" on:click={like}>
     <Icon name="heart" color="dark"/>
-</Button>
+</Button>-->
 </body>
 
 <p>{bool}</p>
