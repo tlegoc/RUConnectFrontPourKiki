@@ -4,7 +4,7 @@
 
 <header>
     <!-- svelte-ignore a11y-missing-attribute -->
-    <img src="/logo.png"  class="logo" />
+    <img src="/logo.png"  class="logo" on:click={() => (window.location.href="/")}/>
     <span class="avatar">
         <Dropdown arrow={false} style="background:none">
             <Avatar size="md" shape="circle">

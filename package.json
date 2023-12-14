@@ -5,11 +5,14 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"preview": "vite preview"
+		"preview": "vite preview",
+		"gh-pages": "npm run build && npx gh-pages -d build"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-static": "^2.0.3",
 		"@sveltejs/kit": "^1.20.4",
+		"gh-pages": "^6.1.0",
 		"svelte": "^4.0.5",
 		"vite": "^4.4.2"
 	},
@@ -19,4 +22,5 @@
 		"svelte-emoji-selector": "^1.0.1",
 		"yesvelte": "^0.0.2-next.213"
 	}
+
 }

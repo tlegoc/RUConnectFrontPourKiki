@@ -25,7 +25,6 @@
     function Dehors() {
         inRU = "Dehors :(";
     }
-
 </script>
 
 <main>
