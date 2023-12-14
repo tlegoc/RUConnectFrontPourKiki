@@ -13,7 +13,7 @@
 					<Button class="stand1" color="primary" href="/stands">
 						STAND 1
 					</Button>
-					<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
 				</El>
 			</El>
 			<El row>
@@ -21,7 +21,7 @@
 					<Button class="stand2" color="primary" href="/stands">
 						STAND 2
 					</Button>
-					<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
 				</El>
 			</El>
 			<El row>
@@ -29,7 +29,7 @@
 					<Button class="stand3" color="primary" href="/stands">
 						STAND 3
 					</Button>
-					<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
 				</El>
 			</El>
 		</El>
