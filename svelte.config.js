@@ -6,6 +6,7 @@ const config = {
 	kit: {
 
 		adapter:  adapter(),
+		output: '.sveltekit/output',
 	}
 };
 
