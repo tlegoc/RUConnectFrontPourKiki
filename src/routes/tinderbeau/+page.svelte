@@ -147,14 +147,8 @@ on:touchend={handleEnd} />-->
     }
 </script>
 <style>
-    body {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    }
-
     .chart-container {
-    height: 70vh;
+    height: 50vh;
     aspect-ratio: 2 / 3;
     perspective: 1000px;
     perspective-origin: center 50%;
@@ -186,28 +180,30 @@ on:touchend={handleEnd} />-->
 </style>
 
 <main>
-<h1>Tinder des plats</h1>
-<body>
-<Button shape="pill" color="green" size="lg" on:click={like}>
-    <Icon name="heart" color="dark"/>
-</Button>
-<div role="tablist" class="chart-container"
-bind:clientWidth={width}>
-{#if i >= length}
-    <p>Tous les plats sont notés</p>
-{:else}
-    <div class="card">
-    <p>{plats[i]}</p>
-    <img src={images[i]} alt="" height=100px/>
-    <p></p></div>
-{/if}
-</div>
+        <h1 class="center title">Tinder des plats</h1>
+        <div class="flex center">
+
+        <Button shape="pill" color="green" size="lg" on:click={like}>
+            <Icon name="heart" color="dark"/>
+        </Button>
+        <div role="tablist" class="chart-container"
+        bind:clientWidth={width}>
+        {#if i >= length}
+            <p>Tous les plats sont notés</p>
+        {:else}
+            <div class="card">
+            <p>{plats[i]}</p>
+            <img src={images[i]} alt="" height=100px/>
+            <p></p></div>
+        {/if}
+        </div>
+
 
 
 <Button shape="pill" color="red" size="lg" on:click={dislike}>
     <Icon name="x" color="dark"/>
 </Button>
+</div>
 
-<p>{bool}</p>
-</body>
+
 </main>

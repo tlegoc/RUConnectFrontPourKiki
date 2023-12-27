@@ -16,8 +16,8 @@
 
 <main>
 	
-	<El container>
-			<El col class="center">
+	<El container class="center">
+			<El col>
 				<ButtonGroup>
 					<Button on:click={
 						() => {
@@ -37,11 +37,11 @@
 					}>Après-demain</Button>
 				</ButtonGroup>
 			</El>
-			<El col>
-				<Label class="center">{today}</Label>
+			<El col style="margin-top: 2vh">
+				<Label>{today}</Label>
 			</El>
-			<El col>
-				<Button style="margin-left: 2%;" size="lg" class="{current === 'astro' ? 'selected' : ''}"
+			<El col class="XS">
+				<Button size="lg" class="{current === 'astro' ? 'selected' : ''}"
 				on:click="{() => current = 'astro'}">Astrolabe</Button>
 				<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
 				on:click="{() => current = 'insa'}">INSA</Button>
@@ -55,7 +55,7 @@
 
 	
 
-		<El container>
+		<El container class="center">
 			<El row>
 				<El col>
 					<Button class="stand1" color="primary" href="/stands">
@@ -85,22 +85,19 @@
 
 <style>
 	:global(.stand1) {
-		width: 10%;
+		width: 150px;
 		font-size: 2em;
 		margin-top: 3%;
-		margin-left: 2%;
 	}
 	:global(.stand2) {
-		width: 10%;
+		width: 150px;
 		font-size: 2em;
 		margin-top: 1%;
-		margin-left: 2%;
 	}
 	:global(.stand3) {
-		width: 10%;
+		width: 150px;
 		font-size: 2em;
 		margin-top: 1%;
-		margin-left: 2%;
 	}
 	:global(.pencil) {
 		margin-top: 2%;
