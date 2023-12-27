@@ -2,7 +2,6 @@
 	import tabler from 'yesvelte/css/tabler.min.css?url'
 	import Header from '../components/Header.svelte'
 	import Footer from '../components/Footer.svelte'
-	export const prerender = true;
 </script>
 
 <svelte:head>

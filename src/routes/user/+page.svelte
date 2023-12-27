@@ -28,7 +28,10 @@
 </script>
 
 <main>
-    <h2 class="title">PROFIL</h2>
+    <div class="flex center">
+        <Icon style="margin-bottom: 0.5em; margin-right: 0.6em;" size="2x" name="arrow-left" on:click={() => (window.location.href="/")}/>
+        <h2 class="title">PROFIL</h2>
+    </div>
     <div class="center">
     
         <span class="flex center XS">

@@ -1,6 +1,16 @@
 <script>
-	import { Card, CardBody, CardTitle, CardMedia, El} from 'yesvelte'
-	import { Button, ButtonGroup, Icon } from 'yesvelte'
+	import { El, Label} from 'yesvelte'
+	import { Button, ButtonGroup } from 'yesvelte'
+	let current = 'astro'
+	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+	let today  = new Date();
+	let tomorrow = new Date(today);
+	tomorrow.setDate(today.getDate() + 1);
+	let aftertomorrow = new Date(tomorrow);
+	aftertomorrow.setDate(tomorrow.getDate() + 1);
+	tomorrow = tomorrow.toLocaleDateString('fr-FR', options);
+	aftertomorrow = aftertomorrow.toLocaleDateString('fr-FR', options);
+	today = today.toLocaleDateString('fr-FR', options);
 	class Plat {
 		constructor(nom, descr) {
 			this.nom = nom;
@@ -14,8 +24,45 @@
 </script>
 
 <main>
+	
+	<El container>
+			<El col class="center">
+				<ButtonGroup>
+					<Button on:click={
+						() => {
+							today = new Date();
+							today = today.toLocaleDateString('fr-FR', options);
+						}
+					}>Aujourd'hui</Button>
+					<Button on:click={
+						() => {
+							today = tomorrow;
+						}
+					}>Demain</Button>
+					<Button on:click={
+						() => {
+							today = aftertomorrow;
+						}
+					}>Après-demain</Button>
+				</ButtonGroup>
+			</El>
+			<El col>
+				<Label class="center">{today}</Label>
+			</El>
+			<El col>
+				<Button style="margin-left: 2%;" size="lg" class="{current === 'astro' ? 'selected' : ''}"
+				on:click="{() => current = 'astro'}">Astrolabe</Button>
+				<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
+				on:click="{() => current = 'insa'}">INSA</Button>
+				<Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
+				on:click="{() => current = 'metro'}">Métronome</Button>
+			</El>
+		
+	</El>
 
-	<Button style="margin-left: 2%;"color="secondary" size="lg">Changer de RU</Button>
+	
+
+	
 
 		<El container>
 			<El row>
@@ -47,19 +94,19 @@
 
 <style>
 	:global(.stand1) {
-		width: 45%;
+		width: 10%;
 		font-size: 2em;
 		margin-top: 3%;
 		margin-left: 2%;
 	}
 	:global(.stand2) {
-		width: 45%;
+		width: 10%;
 		font-size: 2em;
 		margin-top: 1%;
 		margin-left: 2%;
 	}
 	:global(.stand3) {
-		width: 45%;
+		width: 10%;
 		font-size: 2em;
 		margin-top: 1%;
 		margin-left: 2%;
@@ -69,5 +116,9 @@
 		margin-left: 1%;
 		width: 5%;
 		height: 10%;
+	}
+	:global(.selected) {
+		background-color: #00cc33;
+		color: white;
 	}
 </style>
