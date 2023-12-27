@@ -185,7 +185,7 @@ on:touchend={handleEnd} />-->
     
 </style>
 
-
+<main>
 <h1>Tinder des plats</h1>
 <body>
 <Button shape="pill" color="green" size="lg" on:click={like}>
@@ -210,3 +210,4 @@ bind:clientWidth={width}>
 
 <p>{bool}</p>
 </body>
+</main>

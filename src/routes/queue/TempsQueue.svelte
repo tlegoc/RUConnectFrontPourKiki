@@ -1,6 +1,5 @@
 <script>
 	import { Card, CardBody, CardHeader, CardTitle } from 'yesvelte';
-    import { Progress, ProgressBar } from 'yesvelte';
     import Histogram from "./Histogram.svelte";
     export var nomRU;
     export var data;
