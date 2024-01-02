@@ -14,7 +14,7 @@
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem href="/connection">Déconnexion</DropdownItem>
+                <DropdownItem href="/login">Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </span>
