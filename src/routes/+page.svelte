@@ -1,5 +1,17 @@
 <script>
-	import {El, Icon, Label, Popover, PopoverBody, PopoverHeader} from 'yesvelte'
+	import {
+		El,
+		Floating,
+		FormInput,
+		Icon,
+		Label,
+		Modal,
+		ModalBody,
+		ModalHeader, ModalTitle,
+		Popover,
+		PopoverBody,
+		PopoverHeader
+	} from 'yesvelte'
 	import { Button, ButtonGroup } from 'yesvelte'
 	import TempsQueue from "./queue/TempsQueue.svelte";
 	let current = 'astro'
@@ -36,12 +48,24 @@
 		100 : 1,
 		110 : 1
 	};
+
+	let restos = ['Astrolabe', 'INSA', 'Etoile'];
+	let show = false;
+	let actualRU = 'Astrolabe';
+	function toggleModal() {
+		show = !show;
+	}
+
+	function changeRU(nomRU) {
+		actualRU = nomRU;
+		toggleModal();
+	}
 </script>
 
 <main>
 	<El col class="XS">
-		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">Astrolabe</h1>
-		<Button size="md"><Icon name="replace" /></Button>
+		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">{actualRU}</h1>
+		<Button size="md"><Icon name="replace" on:click={() =>(toggleModal())} /></Button>
 			<Popover trigger="hover" placement="right">
 			<PopoverBody>Changer de RU</PopoverBody>
 </Popover>
@@ -119,6 +143,27 @@
 			sizeX="400"/>
 		<a href="/queue">Queues aux autres RU</a>
 	</div>
+
+
+
+	<Modal size="lg" autoClose backdrop={false} placement="center" bind:show>
+		<ModalHeader>
+			<ModalTitle style="width: 100%">
+				<p style="text-align: center">Choisissez votre RU</p>
+			</ModalTitle>
+		</ModalHeader>
+		<ModalBody class="center">
+			{#each restos as ru}
+				<Button color="info" on:click={() =>(changeRU(ru))} style="margin-bottom: 5px">
+					{ru}
+				</Button>
+				<br>
+			{/each}
+		</ModalBody>
+	</Modal>
+
+
+
 
 </main>
 

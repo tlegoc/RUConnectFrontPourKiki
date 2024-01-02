@@ -49,6 +49,7 @@
 		margin-top: 20px;
 		position: relative;
 		margin-bottom: 20px;
+		height: max-content;
 	}
 
 </style>
