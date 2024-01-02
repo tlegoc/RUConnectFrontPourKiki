@@ -28,7 +28,7 @@
         padding: 10px;
         background: #eeeeee;
         position: relative;
-        display: block;
+        height: 120px;
         top: 0px;
         width: 100%;
     }

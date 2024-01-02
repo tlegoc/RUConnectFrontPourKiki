@@ -36,12 +36,16 @@
     <TempsQueue 
                 data={nbrQueue}
                 nomRU="Astrolabe"
-                time={currentTime}/>
+                time={currentTime}
+    sizeX="400"
+    sizeY="200"/>
 
     <TempsQueue 
     data={nbrQueue2}
     nomRU="INSA"
-    time={currentTime}/>
+    time={currentTime}
+    sizeX="400"
+    sizeY="200"/>
             
     
 </main>

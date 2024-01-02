@@ -1,6 +1,7 @@
 <script>
-	import { El, Label} from 'yesvelte'
+	import {El, Icon, Label, Popover, PopoverBody, PopoverHeader} from 'yesvelte'
 	import { Button, ButtonGroup } from 'yesvelte'
+	import TempsQueue from "./queue/TempsQueue.svelte";
 	let current = 'astro'
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
@@ -21,11 +22,39 @@
 	let plat1 = new Plat("hamburger", "c'est bon hein");
 	let plat2 = new Plat("haricot", "c'est bon hein");
 	let plat3 = new Plat("potimaron", "c'est bon hein");
+	let currentTime = 10;
+	let nbrQueue = {
+		10 : 0,
+		20 : 0,
+		30 : 1,
+		40 : 1,
+		50 : 2,
+		60 : 3,
+		70 : 4,
+		80 : 3,
+		90 : 2,
+		100 : 1,
+		110 : 1
+	};
 </script>
 
 <main>
-	
+	<El col class="XS">
+		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">Astrolabe</h1>
+		<Button size="md"><Icon name="replace" /></Button>
+			<Popover trigger="hover" placement="right">
+			<PopoverBody>Changer de RU</PopoverBody>
+</Popover>
+		<!--<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
+        on:click="{() => current = 'insa'}">INSA</Button>
+        <Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
+        on:click="{() => current = 'metro'}">Métronome</Button>*/-->
+		</span>
+	</El>
 	<El container class="center">
+		<El col style="margin-top: 2vh">
+			<Label>{today}</Label>
+		</El>
 			<El col>
 				<ButtonGroup>
 					<Button on:click={
@@ -46,17 +75,8 @@
 					}>Après-demain</Button>
 				</ButtonGroup>
 			</El>
-			<El col style="margin-top: 2vh">
-				<Label>{today}</Label>
-			</El>
-			<El col class="XS">
-				<Button size="lg" class="{current === 'astro' ? 'selected' : ''}"
-				on:click="{() => current = 'astro'}">Astrolabe</Button>
-				<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
-				on:click="{() => current = 'insa'}">INSA</Button>
-				<Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
-				on:click="{() => current = 'metro'}">Métronome</Button>
-			</El>
+
+
 		
 	</El>
 
@@ -90,6 +110,16 @@
 				</El>
 			</El>
 		</El>
+	<div class="center" style="margin-top: 30px; position:relative;">
+	<TempsQueue
+			data={nbrQueue}
+			nomRU=""
+			time={currentTime}
+			sizeY="200"
+			sizeX="400"/>
+		<a href="/queue">Queues aux autres RU</a>
+	</div>
+
 </main>
 
 <style>

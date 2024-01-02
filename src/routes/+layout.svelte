@@ -48,6 +48,7 @@
 	:global(main){
 		margin-top: 20px;
 		position: relative;
+		margin-bottom: 20px;
 	}
 
 </style>

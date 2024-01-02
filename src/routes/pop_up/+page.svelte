@@ -10,9 +10,9 @@
 {#if showPopup}
   <div class="popup">
     <Card>
-      <CardBody>Are you in a queue for the university restaurant ?
-        <Button color="red" on:click={togglePopup}>No</Button>
-			  <Button color="green" ms="auto" on:click={togglePopup}>Yes</Button>
+      <CardBody>Es-tu dans la queue du RU ?
+        <Button color="green" ms="auto" on:click={togglePopup}>Oui</Button>
+        <Button color="red" on:click={togglePopup}>Non</Button>
       </CardBody>
     </Card>
     
