@@ -1,19 +1,21 @@
 <script>
 	import {
+		Button,
+		ButtonGroup,
 		El,
-		Floating,
-		FormInput,
 		Icon,
 		Label,
 		Modal,
 		ModalBody,
-		ModalHeader, ModalTitle,
+		ModalHeader,
+		ModalTitle,
 		Popover,
-		PopoverBody,
-		PopoverHeader
+		PopoverBody
 	} from 'yesvelte'
-	import { Button, ButtonGroup } from 'yesvelte'
 	import TempsQueue from "./queue/TempsQueue.svelte";
+	import {connected} from './stores.js';
+	import {goto} from '$app/navigation';
+
 	let current = 'astro'
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
@@ -60,6 +62,20 @@
 		actualRU = nomRU;
 		toggleModal();
 	}
+
+	let connectedValue = true;
+	connected.subscribe((value) => {
+		connectedValue = value;
+		console.log(value);
+	});
+	// Lecture de la valeur
+	$: {
+		if (!connectedValue) {
+			goto("/login");
+		}
+	}
+
+
 </script>
 
 <main>

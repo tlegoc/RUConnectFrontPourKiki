@@ -1,5 +1,8 @@
-<script lang="ts">import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
-     let hint = "";
+<script lang="ts">
+    import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
+    import { goto } from "$app/navigation";
+    import {connected} from '../stores.js';
+    let hint = "";
     let hint2 = "";
     let mdp = "";
     let state = void 0;
@@ -38,6 +41,12 @@
     function isDisabled(){
         disabled = !(fill.every(element => element === true));
     }
+
+    function connect(){
+        console.log("connect");
+        connected.update((value) => !value);
+        goto("/");
+    }
     
     </script>
     <main>
@@ -51,7 +60,7 @@
             <Icon slot="start-icon" name="key" />
         </FormInput>
 
-        <Button color="success" bind:disabled>
+        <Button color="success" bind:disabled on:click={connect}>
             <Icon name="login" />Se connecter
         </Button>
         <Button href="/signin">
@@ -65,7 +74,6 @@
         .connexion{
             margin-left: 40vw; 
             margin-right: 40vw;
-            margin-top:15vh;
             text-align: center;
         }
     }
@@ -74,7 +82,6 @@
         .connexion{
             margin-left: 20vw; 
             margin-right: 20vw;
-            margin-top:15vh;
             text-align: center;
         }
     }

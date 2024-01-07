@@ -1,5 +1,13 @@
 <script>
     import { El, Navbar, NavbarItem, Avatar, Dropdown, DropdownItem, DropdownMenu } from 'yesvelte'
+    import {connected} from "../routes/stores.js";
+    import { goto } from "$app/navigation";
+
+    function disconnect(){
+        connected.update((value) => !value);
+        goto("/login");
+    }
+
 </script>
 
 <header>
@@ -14,7 +22,7 @@
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem href="/login">Déconnexion</DropdownItem>
+                <DropdownItem on:click={disconnect}>Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </span>
