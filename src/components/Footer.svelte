@@ -1,5 +1,5 @@
 <footer>
-    <h3 class="title" style="padding-top: 25px">© RU Connect 2023</h3>
+    <h3 class="title" style="padding-top: 25px">© RU Connect 2024</h3>
 </footer>
 
 <style>

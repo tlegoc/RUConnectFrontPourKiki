@@ -184,7 +184,7 @@ on:touchend={handleEnd} />-->
 </style>
 
 <main>
-        <h1 class="center title">Tinder des plats</h1>
+        <h1 class="center title">Swipe & Taste</h1>
     {#if i < length}
         <div class="flex center">
 
