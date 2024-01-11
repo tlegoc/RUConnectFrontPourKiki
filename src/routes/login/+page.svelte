@@ -2,6 +2,8 @@
     import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
     import { goto } from "$app/navigation";
     import {connected} from '../stores.js';
+    import { signIn, signOut } from 'aws-amplify/auth';
+
     let hint = "";
     let hint2 = "";
     let mdp = "";
@@ -9,6 +11,8 @@
     let state2 = void 0;
     let fill = [false,false];
     let disabled = true;
+    let username = "";
+    let password = "";
 
     const validatePseudo =(e)=> {
         //Contient que des lettres, chiffres, tirets et underscores
@@ -17,6 +21,7 @@
             state=""
             hint="";
             fill[0] = true;
+            username = e.target.value;
         }else{
             fill[0] = false;
             state = "invalid";
@@ -31,6 +36,7 @@
             fill[1] = true;
             state2=""
             hint2 = ""
+            password = e.target.value;
         }else{
             fill[1] = false;
             state2="invalid"
@@ -43,13 +49,22 @@
         disabled = !(fill.every(element => element === true));
     }
 
-    function connect(){
-        console.log("connect");
-        connected.update((value) => !value);
-        goto("/");
+    async function handleSignIn() {
+
+        try {
+            const { isSignedIn, nextStep } = await signIn({ username, password });
+            connected.update((value) => isSignedIn);
+            goto("/");
+        } catch (error) {
+
+            console.log('error signing in', error);
+
+        }
+
     }
     
     </script>
+
     <main>
 
     <div class="connexion">
@@ -61,7 +76,7 @@
             <Icon slot="start-icon" name="key" />
         </FormInput>
 
-        <Button color="success" bind:disabled on:click={connect}>
+        <Button color="success" bind:disabled on:click={handleSignIn}>
             <Icon name="login" />Se connecter
         </Button>
         <Button href="/signin">

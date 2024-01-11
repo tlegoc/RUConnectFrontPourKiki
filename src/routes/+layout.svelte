@@ -2,6 +2,27 @@
 	import tabler from 'yesvelte/css/tabler.min.css?url'
 	import Header from '../components/Header.svelte'
 	import Footer from '../components/Footer.svelte'
+	import { Amplify } from 'aws-amplify';
+
+
+	Amplify.configure({
+
+		Auth: {
+			Cognito: {
+				//  Amazon Cognito User Pool ID
+				userPoolClientId: '5iglfegkdlo91a5o4anbvue5f6',
+				userPoolId: 'eu-west-1_myIa5BMdP',
+				loginWith: {
+						redirectSignIn: ['http://localhost:5173/'],
+						redirectSignOut: ['http://localhost:5173/login'],
+						responseType: 'token' // or 'code', note that REFRESH token will only be generated when the responseType is code
+					}
+				}
+			}
+	});
+
+	// You can get the current config object
+	const currentConfig = Amplify.getConfig();
 </script>
 
 <svelte:head>

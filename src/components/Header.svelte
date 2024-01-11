@@ -1,11 +1,18 @@
 <script>
     import { El, Navbar, NavbarItem, Avatar, Dropdown, DropdownItem, DropdownMenu } from 'yesvelte'
     import {connected} from "../routes/stores.js";
-    import { goto } from "$app/navigation";
+    import { goto } from "$app/navigation"
+    import { signOut} from "aws-amplify/auth";
 
-    function disconnect(){
-        connected.update((value) => !value);
-        goto("/login");
+    async function handleSignOut() {
+        try {
+            await signOut();
+            connected.update((value) => false);
+            console.log("signed out");
+            goto("/login");
+        } catch (error) {
+            console.log("error signing out: ", error);
+        }
     }
 
 </script>
@@ -22,7 +29,7 @@
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem on:click={disconnect}>Déconnexion</DropdownItem>
+                <DropdownItem on:click={handleSignOut}>Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
     </span>

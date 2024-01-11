@@ -2,6 +2,10 @@
     import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
     import { goto } from "$app/navigation";
     import {connected} from '../stores.js';
+    import {signUp} from "aws-amplify/auth";
+
+    let username = "";
+    let password = "";
     let hint = "";
     let hint2 = "";
     let hint3 = "";
@@ -12,6 +16,23 @@
     let fill = [false,false,false];
     let disabled = true;
 
+
+    async function handleSignUp() {
+
+        try {
+
+            const { isSignUpComplete, nextStep } = await signUp({ username, password });
+            connected.update((value) => true);
+            goto("/tinderbeau");
+
+        } catch (error) {
+
+            console.log('error signing up', error);
+
+        }
+
+    }
+
     const validatePseudo =(e)=> {
         //Contient que des lettres, chiffres, tirets et underscores
         var valid = e.target.value.match(/^[a-zA-Z0-9-_]+$/);
@@ -19,6 +40,7 @@
             state=""
             hint="";
             fill[0] = true;
+            username = e.target.value;
         }else{
             fill[0] = false;
             state = "invalid";
@@ -46,6 +68,7 @@
             fill[2] = true;
             state3=""
             hint3 = ""
+            password = e.target.value;
         }else{
             fill[2] = false;
             state3="invalid"
@@ -56,12 +79,6 @@
 
     function isDisabled(){
         disabled = !(fill.every(element => element === true));
-    }
-
-    function connect(){
-        console.log("connect");
-        connected.update((value) => !value);
-        goto("/tinderbeau");
     }
     
     </script>
@@ -80,7 +97,7 @@
             <Icon slot="start-icon" name="key" />
         </FormInput>
 
-        <Button color="success" bind:disabled on:click={connect}>
+        <Button color="success" bind:disabled on:click={handleSignUp}>
             <Icon name="check" />Créer mon compte
         </Button>
     </div>
