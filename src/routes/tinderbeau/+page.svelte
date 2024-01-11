@@ -123,27 +123,31 @@ on:touchend={handleEnd} />-->
 
 <script>
 
-	import { Button } from 'yesvelte';
-    import { Icon } from 'yesvelte';
-    let plats = ["fromage","paella","ratatouille","galette de sarrazin","tomate"];
+	import { Button, Icon } from 'yesvelte';
+    import { goto } from '$app/navigation';
+    let plats = ["Fromage","Paella","Ratatouille","Galette de sarrazin","Tomate"];
     let images = ["/src/images/fromage.png","/src/images/paella.jpg","/src/images/ratatouille.jpg","/src/images/galette.jpg","/src/images/tomate.webp"]
     let bool = [];
     let width;
     let length = plats.length;
     let i = 0;
     function like(){
-        if(i < length){
+        if(i < length) {
             bool[i] = true;
-        i++;
+            if (i === length - 1) goToHome();
+            i++;
         }
-        
     }
     function dislike(){
         if(i < length){
             bool[i] = false;
-        i++;
+            if (i === length - 1) goToHome();
+            i++;
         }
-        
+    }
+
+    function goToHome() {
+        goto("/");
     }
 </script>
 <style>
@@ -180,30 +184,31 @@ on:touchend={handleEnd} />-->
 </style>
 
 <main>
-        <h1 class="center title">Tinder des plats</h1>
+        <h1 class="center title">Swipe & Taste</h1>
+    {#if i < length}
         <div class="flex center">
 
-        <Button shape="pill" color="green" size="lg" on:click={like}>
+        <Button shape="pill" color="green" size="lg" on:click={like} style="margin-right: 10px">
             <Icon name="heart" color="dark"/>
         </Button>
         <div role="tablist" class="chart-container"
         bind:clientWidth={width}>
-        {#if i >= length}
-            <p>Tous les plats sont notés</p>
-        {:else}
+
             <div class="card">
-            <p>{plats[i]}</p>
             <img src={images[i]} alt="" height=100px/>
-            <p></p></div>
-        {/if}
+            </div>
+
         </div>
-
-
-
-<Button shape="pill" color="red" size="lg" on:click={dislike}>
+<Button shape="pill" color="red" size="lg" on:click={dislike}  style="margin-left: 10px">
     <Icon name="x" color="dark"/>
 </Button>
 </div>
+    {/if}
+    {#if i >= length}
+        <h3 class="center">Redirection vers la page principale</h3>
+    {:else}
+        <h3 class="center XS">{plats[i]}</h3>
+    {/if}
 
 
 </main>

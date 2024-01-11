@@ -32,16 +32,24 @@
 
 <main>
 
+
+<div class="center">
 <h1> Temps de queue dans les RU les plus proches</h1>
     <TempsQueue 
                 data={nbrQueue}
                 nomRU="Astrolabe"
-                time={currentTime}/>
+                time={currentTime}
+    sizeX="400"
+    sizeY="200"/>
 
-    <TempsQueue 
+    <div class="XS"></div>
+
+    <TempsQueue
     data={nbrQueue2}
     nomRU="INSA"
-    time={currentTime}/>
-            
+    time={currentTime}
+    sizeX="400"
+    sizeY="200"/>
+</div>
     
 </main>

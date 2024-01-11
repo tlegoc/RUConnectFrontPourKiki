@@ -1685,6 +1685,11 @@ svelte-hmr@^0.15.3:
   resolved "https://registry.npmjs.org/svelte-hmr/-/svelte-hmr-0.15.3.tgz"
   integrity sha512-41snaPswvSf8TJUhlkoJBekRrABDXDMdpNpT2tfHIv4JuhgvHqLMhEPGtaQn0BmbNSTkuz2Ed20DF2eHw0SmBQ==
 
+svelte-routing@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.npmjs.org/svelte-routing/-/svelte-routing-2.11.0.tgz"
+  integrity sha512-oNJz2A8g5ZqBDuxUWMJLpU9XXGZ40Fz5uRvrGlpENs5C2QWK5m7YKiGINssN9yI/22f9wi4F5oTTkDaTyryolw==
+
 svelte-tabs@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/svelte-tabs/-/svelte-tabs-1.1.0.tgz"

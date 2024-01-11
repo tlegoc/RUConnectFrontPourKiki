@@ -1,6 +1,21 @@
 <script>
-	import { El, Label} from 'yesvelte'
-	import { Button, ButtonGroup } from 'yesvelte'
+	import {
+		Button,
+		ButtonGroup,
+		El,
+		Icon,
+		Label,
+		Modal,
+		ModalBody,
+		ModalHeader,
+		ModalTitle,
+		Popover,
+		PopoverBody
+	} from 'yesvelte'
+	import TempsQueue from "./queue/TempsQueue.svelte";
+	import {connected} from './stores.js';
+	import {goto} from '$app/navigation';
+
 	let current = 'astro'
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
@@ -11,12 +26,75 @@
 	tomorrow = tomorrow.toLocaleDateString('fr-FR', options);
 	aftertomorrow = aftertomorrow.toLocaleDateString('fr-FR', options);
 	today = today.toLocaleDateString('fr-FR', options);
-	
+	class Plat {
+		constructor(nom, descr) {
+			this.nom = nom;
+			this.description = descr;
+		}
+		
+	}
+	let plat1 = new Plat("hamburger", "c'est bon hein");
+	let plat2 = new Plat("haricot", "c'est bon hein");
+	let plat3 = new Plat("potimaron", "c'est bon hein");
+	let currentTime = 10;
+	let nbrQueue = {
+		10 : 0,
+		20 : 0,
+		30 : 1,
+		40 : 1,
+		50 : 2,
+		60 : 3,
+		70 : 4,
+		80 : 3,
+		90 : 2,
+		100 : 1,
+		110 : 1
+	};
+
+	let restos = ['Astrolabe', 'INSA', 'Etoile'];
+	let show = false;
+	let actualRU = 'Astrolabe';
+	function toggleModal() {
+		show = !show;
+	}
+
+	function changeRU(nomRU) {
+		actualRU = nomRU;
+		toggleModal();
+	}
+
+	let connectedValue = true;
+	connected.subscribe((value) => {
+		connectedValue = value;
+		console.log(value);
+	});
+	// Lecture de la valeur
+	$: {
+		if (!connectedValue) {
+			goto("/login");
+		}
+	}
+
+
 </script>
 
 <main>
-	
+	<El col class="XS">
+		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">{actualRU}</h1>
+		<Button size="md"><Icon name="replace" on:click={() =>(toggleModal())} /></Button>
+			<Popover trigger="hover" placement="right">
+			<PopoverBody>Changer de RU</PopoverBody>
+</Popover>
+		<!--<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
+        on:click="{() => current = 'insa'}">INSA</Button>
+        <Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
+        on:click="{() => current = 'metro'}">Métronome</Button>*/-->
+		</span>
+	</El>
 	<El container class="center">
+		<El col style="margin-top: 2vh">
+			<Label>{today}</Label>
+		</El>
 			<El col>
 				<ButtonGroup>
 					<Button on:click={
@@ -37,17 +115,8 @@
 					}>Après-demain</Button>
 				</ButtonGroup>
 			</El>
-			<El col style="margin-top: 2vh">
-				<Label>{today}</Label>
-			</El>
-			<El col class="XS">
-				<Button size="lg" class="{current === 'astro' ? 'selected' : ''}"
-				on:click="{() => current = 'astro'}">Astrolabe</Button>
-				<Button style="margin-left: 2%;" size="lg" class="{current === 'insa' ? 'selected' : ''}"
-				on:click="{() => current = 'insa'}">INSA</Button>
-				<Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
-				on:click="{() => current = 'metro'}">Métronome</Button>
-			</El>
+
+
 		
 	</El>
 
@@ -58,7 +127,7 @@
 		<El container class="center">
 			<El row>
 				<El col>
-					<Button class="stand1" color="primary" href="/stands">
+					<Button class="stand1" color="primary" href="/stands/{plat1.nom}">
 						STAND 1
 					</Button>
 					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
@@ -66,7 +135,7 @@
 			</El>
 			<El row>
 				<El col>
-					<Button class="stand2" color="primary" href="/stands">
+					<Button class="stand2" color="primary" href="/stands/{plat2.nom}">
 						STAND 2
 					</Button>
 					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
@@ -74,13 +143,44 @@
 			</El>
 			<El row>
 				<El col>
-					<Button class="stand3" color="primary" href="/stands">
+					<Button class="stand3" color="primary" href="/stands/{plat3.nom}">
 						STAND 3
 					</Button>
 					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
 				</El>
 			</El>
 		</El>
+	<div class="center" style="margin-top: 30px; position:relative;">
+	<TempsQueue
+			data={nbrQueue}
+			nomRU=""
+			time={currentTime}
+			sizeY="200"
+			sizeX="400"/>
+		<a href="/queue">Queues aux autres RU</a>
+	</div>
+
+
+
+	<Modal size="lg" autoClose backdrop={false} placement="center" bind:show>
+		<ModalHeader>
+			<ModalTitle style="width: 100%">
+				<p style="text-align: center">Choisissez votre RU</p>
+			</ModalTitle>
+		</ModalHeader>
+		<ModalBody class="center">
+			{#each restos as ru}
+				<Button color="info" on:click={() =>(changeRU(ru))} style="margin-bottom: 5px">
+					{ru}
+				</Button>
+				<br>
+			{/each}
+		</ModalBody>
+	</Modal>
+
+
+
+
 </main>
 
 <style>

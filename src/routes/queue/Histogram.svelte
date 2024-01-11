@@ -15,7 +15,7 @@
     let yTexte = ["Attente très longue", "Attente longue", "Attente moyenne","Peu d'attente","Pas d'attente"];
     $: yScale = scaleLinear().domain([0,4]).range([0,height]);
     $: xScale = scaleLinear().domain([0,100]).range([0,width]);
-    
+
    
 
   // Declare the y (vertical position) scale.
@@ -24,9 +24,7 @@
 </script>
 
 <div
-  class="chart-container"
-  bind:clientWidth={width}
->
+  class="chart-container">
     <svg {width} {height}>
         {#each yTicks as tick,i}
         <g class='tick' transform="translate(0,{yScale(tick)})">
@@ -52,7 +50,6 @@
 </div>
 <div
   class="chart-container"
-  bind:clientWidth={width}
 >
 <svg {width} height=50>
 {#if width>=600}
@@ -72,7 +69,6 @@
 {/if}
 
 
-<line x1=0 x2={width} y1=0 y2=0 stroke="black" /> 
+<line x1=0 x2={width} y1=0 y2=0 stroke="black" />
 </svg>
 </div>
-  
