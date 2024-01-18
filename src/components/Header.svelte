@@ -1,31 +1,60 @@
 <script>
     import { El, Navbar, NavbarItem, Avatar, Dropdown, DropdownItem, DropdownMenu } from 'yesvelte'
-    import {connected} from "../routes/stores.js";
-    import { goto } from "$app/navigation";
+    import {connected, usernameS} from "../routes/stores.js";
+    import { goto } from "$app/navigation"
+    import { signOut} from "aws-amplify/auth";
+    import { onMount } from 'svelte';
 
-    function disconnect(){
-        connected.update((value) => !value);
-        goto("/login");
+
+    async function handleSignOut() {
+        try {
+            await signOut();
+            connected.update((value) => false);
+            console.log("signed out");
+            goto("/login");
+        } catch (error) {
+            console.log("error signing out: ", error);
+        }
     }
+
+    let pseudo = "Ps";
+    let connectedVal = false;
+
+    usernameS.subscribe((value) => {
+        pseudo = value.slice(0,2);
+    });
+    let avatar = null;
+    /*onMount(() => {
+        let sPath = window.location.pathname;
+        let sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
+        if(sPage === "login" || sPage === "signup") {
+            avatar.disabled = true;
+            avatar.classList.remove("visible");
+            console.log(avatar.classList);
+        }else{
+            avatar.classList.add("visible");
+            avatar.classList.remove("invisible");
+        }
+    });*/
 
 </script>
 
 <header>
     <!-- svelte-ignore a11y-missing-attribute -->
     <img src="/logo.png"  class="logo" on:click={() => (window.location.href="/")}/>
-    <span class="avatar">
+    <div class="avatar visible" bind:this={avatar}>
         <Dropdown arrow={false} style="background:none">
             <Avatar size="md" shape="circle">
                 <!-- svelte-ignore a11y-missing-attribute -->
-                Ps
+                {pseudo}
             </Avatar>
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
                 <DropdownItem>Paramètres</DropdownItem>
-                <DropdownItem on:click={disconnect}>Déconnexion</DropdownItem>
+                <DropdownItem on:click={handleSignOut}>Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
-    </span>
+    </div>
         
 </header>
 
@@ -53,5 +82,14 @@
         padding: 25px;
         width: 100px;
     }
+
+    :global(.invisible){
+        display: none;
+    }
+
+    :global(.visible){
+        display: block;
+    }
+
 
 </style>

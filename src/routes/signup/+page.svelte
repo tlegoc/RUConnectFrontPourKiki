@@ -1,7 +1,11 @@
 <script lang="ts">
-    import { Button, El, FormInput, Icon, Tooltip } from "yesvelte";
+    import {Alert, Button, El, FormInput, Icon, Spinner, Tooltip} from "yesvelte";
     import { goto } from "$app/navigation";
-    import {connected} from '../stores.js';
+    import {connected, usernameS} from '../stores.js';
+    import {signUp} from "aws-amplify/auth";
+
+    let username = "";
+    let password = "";
     let hint = "";
     let hint2 = "";
     let hint3 = "";
@@ -11,6 +15,29 @@
     let state3 = void 0;
     let fill = [false,false,false];
     let disabled = true;
+    let loading = null;
+    let cantConnect = null;
+
+    async function handleSignUp() {
+
+        try {
+            loading.classList.remove("invisible")
+            loading.classList.add("visible");
+            const { isSignUpComplete, nextStep } = await signUp({ username, password });
+            usernameS.update((value) => username);
+            connected.update((value) => true);
+            goto("/tinderbeau");
+
+        } catch (error) {
+            console.log(error);
+            cantConnect.classList.remove("invisible")
+            cantConnect.classList.add("visible");
+            loading.classList.add("invisible")
+            loading.classList.remove("visible");
+
+        }
+
+    }
 
     const validatePseudo =(e)=> {
         //Contient que des lettres, chiffres, tirets et underscores
@@ -19,6 +46,7 @@
             state=""
             hint="";
             fill[0] = true;
+            username = e.target.value;
         }else{
             fill[0] = false;
             state = "invalid";
@@ -29,14 +57,14 @@
 
     const validateMDP =(e)=> {
         mdp = e.target.value;
-        if(e.target.value.length > 6){
+        if(e.target.value.length > 7){
             fill[1] = true;
             state2=""
             hint2 = ""
         }else{
             fill[1] = false;
             state2="invalid"
-            hint2 = "Doit dépasser 6 caractères"
+            hint2 = "Doit dépasser 7 caractères"
         }
         isDisabled();
     }
@@ -46,6 +74,7 @@
             fill[2] = true;
             state3=""
             hint3 = ""
+            password = e.target.value;
         }else{
             fill[2] = false;
             state3="invalid"
@@ -56,12 +85,6 @@
 
     function isDisabled(){
         disabled = !(fill.every(element => element === true));
-    }
-
-    function connect(){
-        console.log("connect");
-        connected.update((value) => !value);
-        goto("/tinderbeau");
     }
     
     </script>
@@ -80,9 +103,18 @@
             <Icon slot="start-icon" name="key" />
         </FormInput>
 
-        <Button color="success" bind:disabled on:click={connect}>
+        <Button color="success" bind:disabled on:click={handleSignUp}>
             <Icon name="check" />Créer mon compte
         </Button>
+    </div>
+    <div class="connexion XS invisible" bind:this={loading}>
+        <Spinner color="cyan"/>
+    </div>
+
+    <div class="connexion invisible" bind:this={cantConnect}>
+        <Alert dismissible important icon="alert-circle" color="danger" class="S">
+            Pseudo déjà existant.
+        </Alert>
     </div>
 </main>
 
@@ -101,5 +133,13 @@
             margin-right: 20vw;
             text-align: center;
         }
+    }
+
+    .invisible {
+        display: none;
+    }
+    .visible {
+        text-align: center;
+        display: block;
     }
 </style>

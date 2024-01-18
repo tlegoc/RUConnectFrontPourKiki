@@ -11,7 +11,9 @@
         Input, Radio,
         RadioGroup, SliderKnob
     } from 'yesvelte'
-    let pseudo = "Pseudo";
+    import {connected, usernameS} from "../stores.js";
+
+    let pseudo = "Kilian";
     let inRU = "Dans la queue";
 
     function RU() {
@@ -25,6 +27,11 @@
     function Dehors() {
         inRU = "Dehors :(";
     }
+
+    usernameS.subscribe((value) => {
+        pseudo = value;
+    });
+
 </script>
 
 <main>
@@ -37,7 +44,7 @@
         <span class="flex center XS">
             <Avatar size="md" shape="circle" style="margin-right:20px">
                 <!-- svelte-ignore a11y-missing-attribute -->
-                Ps
+                {pseudo.slice(0,2)}
             </Avatar>
             <input type="text" class="XS" value={pseudo ?? "Pseudo"} size=5 oninput="this.size = this.value.length/1.7 +1" style="border-color:rgba(0,0,0,0); background: rgba(0,0,0,0); margin-bottom: 25px;"/>
             <Icon name="edit" style="margin-left:-1vw;"/>
