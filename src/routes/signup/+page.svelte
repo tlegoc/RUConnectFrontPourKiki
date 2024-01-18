@@ -1,7 +1,7 @@
 <script lang="ts">
     import {Alert, Button, El, FormInput, Icon, Spinner, Tooltip} from "yesvelte";
     import { goto } from "$app/navigation";
-    import {connected} from '../stores.js';
+    import {connected, usernameS} from '../stores.js';
     import {signUp} from "aws-amplify/auth";
 
     let username = "";
@@ -24,6 +24,7 @@
             loading.classList.remove("invisible")
             loading.classList.add("visible");
             const { isSignUpComplete, nextStep } = await signUp({ username, password });
+            usernameS.update((value) => username);
             connected.update((value) => true);
             goto("/tinderbeau");
 

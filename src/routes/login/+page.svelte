@@ -1,7 +1,7 @@
 <script lang="ts">
     import {Alert, Button, El, FormInput, Icon, Spinner, Tooltip} from "yesvelte";
     import { goto } from "$app/navigation";
-    import {connected} from '../stores.js';
+    import {connected, usernameS} from '../stores.js';
     import { signIn, signOut } from 'aws-amplify/auth';
 
     let hint = "";
@@ -57,6 +57,7 @@
             loading.classList.add("visible");
             const { isSignedIn, nextStep } = await signIn({ username, password });
             connected.update((value) => isSignedIn);
+            usernameS.update((value) => username);
             goto("/");
         } catch (error) {
             cantConnect.classList.remove("invisible")
@@ -84,7 +85,7 @@
             <Icon name="login" />Se connecter
         </Button>
 
-        <Button href="/signin">
+        <Button href="/signup">
             <Icon name="user-check" />Créer un compte
         </Button>
 
