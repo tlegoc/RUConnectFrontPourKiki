@@ -15,7 +15,7 @@
 	import TempsQueue from "./queue/TempsQueue.svelte";
 	import {connected} from './stores.js';
 	import {goto} from '$app/navigation';
-
+	import { onMount } from "svelte";
 	let current = 'astro'
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
@@ -36,7 +36,6 @@
 	let plat1 = new Plat("hamburger", "c'est bon hein");
 	let plat2 = new Plat("haricot", "c'est bon hein");
 	let plat3 = new Plat("potimaron", "c'est bon hein");
-	let currentTime = 10;
 	let nbrQueue = {
 		10 : 0,
 		20 : 0,
@@ -74,6 +73,27 @@
 			goto("/login");
 		}
 	}
+	let ip = "";
+	let city = "strasbourg";
+	onMount(() => {
+
+		fetch("https://api.ipify.org?format=json")
+				.then(response => response.json())
+				.then(data => {
+					ip = data.ip;
+				}).catch(error => {
+					console.log(error);
+				});
+
+
+		fetch("http://ip-api.com/json/"+ip+"?lang=fr&fields=city")
+				.then(response => response.json())
+				.then(data => {
+					city = data.city;
+				}).catch(error => {
+			console.log(error);
+		});
+	});
 
 
 </script>
@@ -154,7 +174,7 @@
 	<TempsQueue
 			data={nbrQueue}
 			nomRU=""
-			time={currentTime}
+			time={new Date().getHours()+ new Date().getMinutes()/60}
 			sizeY="200"
 			sizeX="400"/>
 		<a href="/queue">Queues aux autres RU</a>

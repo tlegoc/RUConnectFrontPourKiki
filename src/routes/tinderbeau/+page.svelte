@@ -134,6 +134,7 @@ on:touchend={handleEnd} />-->
     function like(){
         if(i < length) {
             bool[i] = true;
+
             if (i === length - 1) goToHome();
             i++;
         }
