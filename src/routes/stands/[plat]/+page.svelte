@@ -1,46 +1,22 @@
 <script>
+    import { onMount } from 'svelte';
     import { Card, CardBody, CardTitle, CardMedia, El, Icon } from 'yesvelte'
     import { Button, ButtonGroup } from 'yesvelte'
 
     export let data;
 
     let menu = "";
+    let plat = "";
 
-    /*$: {
+    onMount(async () => {
+        await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/strasbourg`).then(res => res.text()).then(res => {
+            menu = res;
+            var domParser = new DOMParser();
+            var doc = domParser.parseFromString(menu, 'text/html');
+            console.log(doc);
+            plat = doc.getElementsByTagName('resto')[0].getElementsByTagName('menu')[0].getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
+        })});
 
-
-        const req = new XMLHttpRequest();
-
-        req.addEventListener("progress", updateProgress);
-        req.addEventListener("load", transferComplete);
-        req.addEventListener("error", transferFailed);
-        req.addEventListener("abort", transferCanceled);
-
-        req.open("HEAD", "http://webservices-v2.crous-mobile.fr:8080/feed/strasbourg/externe/menu.xml", true);
-        req.send();
-// progress on transfers from the server to the client (downloads)
-        function updateProgress(event) {
-            if (event.lengthComputable) {
-                const percentComplete = (event.loaded / event.total) * 100;
-                // …
-            } else {
-                // Unable to compute progress information since the total size is unknown
-            }
-        }
-
-        function transferComplete(evt) {
-            console.log("The transfer is complete.");
-        }
-
-        function transferFailed(evt) {
-            console.log("An error occurred while transferring the file.");
-        }
-
-        function transferCanceled(evt) {
-            console.log("The transfer has been canceled by the user.");
-        }
-
-    }*/
 </script>
 
 
@@ -53,6 +29,6 @@
 </div>
 
     <div class="center" style="height: 50vh;">
-        <p>Le menu s'affichera ici</p>
+        <p>{plat}</p>
     </div>
 </main>
