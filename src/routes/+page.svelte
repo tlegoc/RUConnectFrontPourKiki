@@ -50,16 +50,16 @@
 		110 : 1
 	};
 
-	let restos = ['Astrolabe', 'INSA', 'Etoile'];
 	let show = false;
 	let show2 = false;
-	let actualRU = 'Astrolabe';
+	let actualRU = 'Resto U\' Astrolabe';
 	function toggleModal() {
 		show = !show;
 	}
 
 	function toggleModalCity() {
 		show2 = !show2;
+		if(!show2)toggleModal();
 	}
 
 	function changeRU(nomRU) {
@@ -87,38 +87,51 @@
 	}
 
 	let villes = [
+		"Rennes - Bretagne",
+		"Normandie",
 		"Paris",
-		"Marseille",
-		"Lyon",
-		"Toulouse",
-		"Nice",
-		"Nantes",
-		"Strasbourg",
-		"Montpellier",
-		"Bordeaux",
-		"Lille",
-		"Rennes",
-		"Reims",
-		"Le Havre",
-		"Cergy",
-		"Saint-Étienne",
-		"Toulon",
-		"Angers",
-		"Grenoble",
-		"Dijon",
-		"Nîmes",
-		"Villeurbanne",
-		"Saint-Denis",
-		"Le Mans",
-		"Aix-en-Provence",
-		"Clermont-Ferrand",
-		"Brest",
-		"Limoges",
-		"Tours",
+		"Versailles",
+		"Créteil",
 		"Amiens",
-		"Metz"
+		"Nantes - Pays de la Loire",
+		"Poitiers",
+		"Bordeaux - Aquitaine",
+		"Toulouse - Occitanie",
+		"Montpellier - Occitanie",
+		"Limoges",
+		"Orléans - Tours",
+		"Lille - Nord-Pas-de-Calais",
+		"Reims",
+		"Lorraine",
+		"Strasbourg",
+		"Bourgogne - Franche-Comté",
+		"Lyon",
+		"Clermont - Auvergne",
+		"Grenoble - Alpes",
+		"Aix - Marseilles - Avignon",
+		"Nice - Toulon",
+		"Corse",
+		"La Réunion",
+		"Antilles et Guyane",
 	];
 	let ville_crous = {
+		"Rennes - Bretagne" : "rennes",
+		"Normandie" : "normandie",
+		"Nantes - Pays de la Loire" : "nantes",
+		"Bordeaux - Aquitaine" : "bordeaux",
+		"Toulouse - Occitanie" : "toulouse",
+		"Montpellier - Occitanie" : "montpellier",
+		"Orléans - Tours" : "orleans.tours",
+		"Lille - Nord-Pas-de-Calais" : "lille",
+		"Lorraine" : "nancy.metz",
+		"Bourgogne - Franche-Comté" : "bfc",
+		"Clermont - Auvergne" : "clermont.ferrand",
+		"Grenoble - Alpes" : "grenoble",
+		"Aix - Marseilles - Avignon" : "aix.marseille",
+		"Nice - Toulon" : "nice",
+		"Corse" : "corse",
+		"La Réunion" : "reunion",
+		"Antilles et Guyane" : "antilles.guyane",
 		"Paris": "paris",
 		"Marseille": "aix.marseille",
 		"Lyon": "lyon",
@@ -374,8 +387,9 @@
 		"Thiais": "paris"};
 
 	let ip = "";
-	let city = "Strasbourg";
-	let crous = "strasbourg";
+	let city = "Rennes";
+	let crous = "rennes";
+	let restos = ["Resto U' Astrolabe"];
 
 	function getRUs(){
 		const queryParams = new URLSearchParams({ get_ids: true });
@@ -383,11 +397,13 @@
 			.then(res => res.text()).then(res => {
 				let test = res;
 				var domParser = new DOMParser();
-				var doc = domParser.parseFromString(test, 'text/html');
+				var doc = domParser.parseFromString(test, 'text/xml');
 				let balises = doc.getElementsByTagName("resto");
 				restos = [];
 				for (let i = 0; i < balises.length; i++) {
-					restos.push(balises[i].getAttribute("title"));
+					if(balises[i].getAttribute("type") === "Restaurant"){
+						restos.push(balises[i].getAttribute("title"));
+					}
 				}
 
 		})
@@ -429,7 +445,7 @@
 			<h1 style="margin-right: 5px; margin-top: 10px">{city}</h1>
 			<Button size="md"><Icon name="replace" on:click={() =>(toggleModalCity())} /></Button>
 			<Popover trigger="hover" placement="right">
-			<PopoverBody>Changer de Ville</PopoverBody>
+			<PopoverBody>Changer de Crous</PopoverBody>
 </Popover>
 		</span>
 		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">{actualRU}</h1>
@@ -514,7 +530,7 @@
 
 
 
-	<Modal size="lg" backdrop={false} placement="center" bind:show={show}>
+	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show}>
 		<ModalHeader>
 			<ModalTitle style="width: 100%">
 				<p style="text-align: center">Choisissez votre RU</p>
@@ -533,7 +549,7 @@
 	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show2}>
 		<ModalHeader>
 			<ModalTitle style="width: 100%">
-				<p style="text-align: center">Choisissez votre Ville</p>
+				<p style="text-align: center">Choisissez votre Crous</p>
 			</ModalTitle>
 		</ModalHeader>
 		<ModalBody class="center">
