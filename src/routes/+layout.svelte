@@ -51,6 +51,9 @@
 		text-align: center;
         font-size: xx-large;
 	}
+	:global(.XXS){
+		margin-top: 1%;
+	}
 	:global(.XS){
 		margin-top: 2%;
 	}

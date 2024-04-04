@@ -1,7 +1,7 @@
 <script>
 	import {
 		Button,
-		ButtonGroup,
+		ButtonGroup, Dot,
 		El,
 		Icon,
 		Label,
@@ -10,7 +10,7 @@
 		ModalHeader,
 		ModalTitle,
 		Popover,
-		PopoverBody
+		PopoverBody, Status
 	} from 'yesvelte'
 	import TempsQueue from "./queue/TempsQueue.svelte";
 	import {connected} from './stores.js';
@@ -36,19 +36,6 @@
 	let plat1 = new Plat("hamburger", "c'est bon hein");
 	let plat2 = new Plat("haricot", "c'est bon hein");
 	let plat3 = new Plat("potimaron", "c'est bon hein");
-	let nbrQueue = {
-		10 : 0,
-		20 : 0,
-		30 : 1,
-		40 : 1,
-		50 : 2,
-		60 : 3,
-		70 : 4,
-		80 : 3,
-		90 : 2,
-		100 : 1,
-		110 : 1
-	};
 
 	let show = false;
 	let show2 = false;
@@ -433,21 +420,35 @@
 
 		getRUs();
 	});
-
-
-
-
 </script>
 
 <main>
-	<El col class="XS">
-		<span class="flex center">
-			<h1 style="margin-right: 5px; margin-top: 10px">{city}</h1>
-			<Button size="md"><Icon name="replace" on:click={() =>(toggleModalCity())} /></Button>
+	<div class="center" style="margin-top: -50px">
+		<ButtonGroup>
+			<Button on:click={
+						() => {
+							today = new Date();
+							today = today.toLocaleDateString('fr-FR', options);
+						}
+					} ghost color="dark" ><Icon name="chevron-left"/></Button>
+			<p style="margin-top: 15px">{today}</p>
+			<Button on:click={
+						() => {
+							today = aftertomorrow;
+						}
+					} ghost color="dark"><Icon name="chevron-right"/></Button>
+		</ButtonGroup>
+	</div>
+		<span class="flex center" style="margin-top: -20px">
+			<Icon name="map-pin" style="margin-right: 5px; margin-bottom: 5px"/>
+			<h3 style="margin-right: 5px; margin-top: 15px">{city}</h3>
+			<Button size="sm"><Icon name="replace" on:click={() =>(toggleModalCity())} /></Button>
 			<Popover trigger="hover" placement="right">
 			<PopoverBody>Changer de Crous</PopoverBody>
 </Popover>
 		</span>
+
+		<div class="center XS" style="margin-bottom: -10px"><Status color="danger"><Dot color="danger" animated />Affluence élevée</Status></div>
 		<span class="flex center"><h1 style="margin-right: 5px; margin-top: 10px">{actualRU}</h1>
 		<Button size="md"><Icon name="replace" on:click={() =>(toggleModal())} /></Button>
 			<Popover trigger="hover" placement="right">
@@ -458,39 +459,6 @@
         <Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
         on:click="{() => current = 'metro'}">Métronome</Button>*/-->
 		</span>
-	</El>
-	<El container class="center">
-		<El col style="margin-top: 2vh">
-			<Label>{today}</Label>
-		</El>
-			<El col>
-				<ButtonGroup>
-					<Button on:click={
-						() => {
-							today = new Date();
-							today = today.toLocaleDateString('fr-FR', options);
-						}
-					}>Aujourd'hui</Button>
-					<Button on:click={
-						() => {
-							today = tomorrow;
-						}
-					}>Demain</Button>
-					<Button on:click={
-						() => {
-							today = aftertomorrow;
-						}
-					}>Après-demain</Button>
-				</ButtonGroup>
-			</El>
-
-
-		
-	</El>
-
-	
-
-	
 
 		<El container class="center">
 			<El row>
@@ -518,17 +486,6 @@
 				</El>
 			</El>
 		</El>
-	<div class="center" style="margin-top: 30px; position:relative;">
-	<TempsQueue
-			data={nbrQueue}
-			nomRU=""
-			time={new Date().getHours()+ new Date().getMinutes()/60}
-			sizeY="200"
-			sizeX="400"/>
-		<a href="/queue">Queues aux autres RU</a>
-	</div>
-
-
 
 	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show}>
 		<ModalHeader>

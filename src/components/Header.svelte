@@ -43,14 +43,13 @@
     <!-- svelte-ignore a11y-missing-attribute -->
     <img src="/logo.png"  class="logo" on:click={() => (window.location.href="/")}/>
     <div class="avatar visible" bind:this={avatar}>
-        <Dropdown arrow={false} style="background:none">
+        <Dropdown arrow={false} style="background:none" placement="bottom-end">
             <Avatar size="md" shape="circle">
                 <!-- svelte-ignore a11y-missing-attribute -->
                 {pseudo}
             </Avatar>
             <DropdownMenu>
                 <DropdownItem href="/user">Mon profil</DropdownItem>
-                <DropdownItem>Paramètres</DropdownItem>
                 <DropdownItem on:click={handleSignOut}>Déconnexion</DropdownItem>
             </DropdownMenu>
         </Dropdown>
