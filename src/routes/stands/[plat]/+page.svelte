@@ -49,6 +49,7 @@
         plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
     });
     
+    let menu = "";
 </script>
 
 

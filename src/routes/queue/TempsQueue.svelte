@@ -5,9 +5,11 @@
     export var data;
     export var sizeX;
     export var sizeY;
-    let currentTime = 11.789;
+    export var time;
     let width;
-    $: time = ((currentTime-11.25)/2.5)*width;
+    $: {
+        time = ((time/24) - (11.25/24)) * (1/( (13.75/24) - (11.25/24))) * sizeX;
+    }
     const keys = Object.keys(data);
     const values = Object.values(data);
     keys.filter((value,i)=>{

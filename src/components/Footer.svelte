@@ -8,6 +8,7 @@
     footer{
         background: #eeeeee;
         width: 100%;
+        margin-top: auto;
     }
     h3{
         font-family: 'Poppins', sans-serif;

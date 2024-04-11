@@ -8,13 +8,20 @@
         DropdownItem,
         DropdownMenu, Fieldset, FormSlider,
         Icon,
-        Input, Radio,
+        Input, Modal, ModalBody, ModalFooter, Radio,
         RadioGroup, SliderKnob
     } from 'yesvelte'
     import {connected, usernameS} from "../stores.js";
+    import {onMount} from "svelte";
 
     let pseudo = "Kilian";
     let inRU = "Dans la queue";
+    let friendsinRU = ["Rémi", "Julie", "Théo"];
+    let friendsinqueue = ["Ariane", "Kilian", "Benoit", "Melanie"];
+    let friendshungry = ["Axel", "Olivier"];
+    let allPseudos = ["Rémi", "Julie", "Théo", "Ariane", "Kilian", "Benoit", "Melanie", "Axel", "Olivier"];
+    let filteredPseudos = [];
+    let shownFriend = "";
 
     function RU() {
         inRU = "Dans le RU";
@@ -24,12 +31,35 @@
         inRU = "Dans la queue";
     }
 
+    const searchPseudos = (keyword) => {
+        if(keyword!=null || keyword!==""){
+            filteredPseudos = allPseudos.filter(pseudo => pseudo.toLowerCase().includes(keyword.toLowerCase()));
+        }
+    }
+
     function Dehors() {
         inRU = "Dehors :(";
     }
 
+    function showFriendModal(friend){
+        shownFriend = friend;
+        showFriend = true;
+        console.log(shownFriend);
+        console.log(showFriend);
+    }
+
     usernameS.subscribe((value) => {
         pseudo = value;
+    });
+    let show = false;
+    let showFriend = false;
+
+    onMount(async () => {
+        await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/users`)
+            .then(response => response.json())
+            .then(data => {
+                allPseudos = data;
+            });
     });
 
 </script>
@@ -41,13 +71,14 @@
     </div>
     <div class="center">
     
-        <span class="flex center XS">
+        <span class="flex center XXS">
             <Avatar size="md" shape="circle" style="margin-right:20px">
                 <!-- svelte-ignore a11y-missing-attribute -->
                 {pseudo.slice(0,2)}
             </Avatar>
-            <input type="text" class="XS" value={pseudo ?? "Pseudo"} size=5 oninput="this.size = this.value.length/1.7 +1" style="border-color:rgba(0,0,0,0); background: rgba(0,0,0,0); margin-bottom: 25px;"/>
-            <Icon name="edit" style="margin-left:-1vw;"/>
+            <h3 style="margin-top: 10px">{pseudo}</h3>
+            <!--<input type="text" class="XS" value={pseudo ?? "Pseudo"} size=5 oninput="this.size = this.value.length/1.7 +1" style="border-color:rgba(0,0,0,0); background: rgba(0,0,0,0); margin-bottom: 25px;"/>-->
+            <!--<Icon name="edit" style="margin-left:-1vw;"/>-->
         </span>
         <h3 style="margin-bottom: 5px">Je suis</h3>
         <div class="center">
@@ -78,28 +109,58 @@
         </div>
         <div>
             <div class="flex friendList">
-                <Avatar class="friend" color="success">Re</Avatar>
-                <Avatar class="friend" color="success">Ju</Avatar>
-                <Avatar class="friend" color="success">Pi</Avatar>
+                {#each friendsinRU as fr}
+                    <Avatar class="friend" color="success" on:click={() => showFriendModal(fr)}>{fr.slice(0,2)}</Avatar>
+                {/each}
             </div>
             <div class="flex friendList">
 
-                <Avatar class="friend" color="warning">Ar</Avatar>
-                <Avatar class="friend" color="warning">Ki</Avatar>
-                <Avatar class="friend" color="warning">Be</Avatar>
-                <Avatar class="friend" color="warning">Me</Avatar>
+                {#each friendsinqueue as fr}
+                    <Avatar class="friend" color="warning" on:click={() => showFriendModal(fr)}>{fr.slice(0,2)}</Avatar>
+                {/each}
 
             </div>
             <div class="flex friendList">
 
-                <Avatar class="friend" color="danger">Ax</Avatar>
-                <Avatar class="friend" color="danger">Ol</Avatar>
+                {#each friendshungry as fr}
+                    <Avatar class="friend" color="danger" on:click={() => showFriendModal(fr)}>{fr.slice(0,2)}</Avatar>
+                {/each}
             </div>
         </div>
 
-
     </div>
+        <Button color="primary" class="XXS" on:click={() => (show = !show)}>
+            <Icon name="plus" />Ajouter
+        </Button>
 </div>
+
+    <Modal scrollable title="Mais où sont mes amis ??" placement="center" bind:show>
+        <ModalBody>
+            <Input placeholder="Pseudo" on:input={(e) => searchPseudos(e.target.value)}>
+                <Icon slot="start" name="search" />
+            </Input>
+            <div class="center XS">
+            {#each filteredPseudos as fr}
+                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success"><Icon name="plus"/></Button></div>
+
+            {/each}
+            </div>
+        </ModalBody>
+        <ModalFooter>
+            <div><Button me="auto" on:click={() => (show = false)}>Fermer</Button></div>
+        </ModalFooter>
+    </Modal>
+
+    <Modal placement="center" bind:show={showFriend}>
+        <ModalBody>
+            <div class="center">
+                <Avatar size="lg">{shownFriend.slice(0,2)}</Avatar>
+                <h3>{shownFriend}</h3>
+            </div>
+            <div class="center"><Button color="warning" >Retirer</Button></div>
+            <div class="center"><Button me="auto" on:click={() => (showFriend = false)}>Fermer</Button></div>
+        </ModalBody>
+    </Modal>
 </main>
 
 <style>

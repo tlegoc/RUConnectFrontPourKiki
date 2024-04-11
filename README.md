@@ -55,3 +55,9 @@ Il y a aussi un histogramme permettant de visualiser rapidement à quelle heure 
 
 #### 🙋‍♀️ **Profil de l'utilisateur connecté :**
 Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le profil de l'utilisateur connecté. Sur ce dernier, il a accès à ses informations personnelles (nom, prénom, âge), et surtout il peut les modififier. Ces nouvelles informations seront ainsi modifiées sur toutes les pages où on peut les voir. L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.
+
+#### 🍽 **Swipe & Taste :**
+Lors de la création de compte, l'utilisateur doit passer par cette page. Une liste d’ingrédients va défiler devant l’utilisateur, et ce dernier va pouvoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire. A l'avenir, certains menus seront donc recommandés en fonction des choix de l’utilisateur.
+
+####  **Queues :**
+Cette page permet de voir les temps de queue de tous les RU proches. Elle est accessible depuis la page d'accueil en cliquant sur le bouton "Queues aux autres RU" en dessous de l'organigramme.
