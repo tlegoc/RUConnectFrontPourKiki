@@ -9,7 +9,8 @@
     let plat = "";
 
     onMount(async () => {
-        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/strasbourg`);
+        console.log(data);
+        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/`+data.nom_plat);
         res = await res.text();
         const cdataContent = res.match(/<!\[CDATA\[(.*?)\]\]>/s)[1];
         var domParser = new DOMParser();
@@ -48,8 +49,7 @@
         
         plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
     });
-    
-    let menu = "";
+
 </script>
 
 
