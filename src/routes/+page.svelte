@@ -27,13 +27,6 @@
 	tomorrow = tomorrow.toLocaleDateString('fr-FR', options);
 	aftertomorrow = aftertomorrow.toLocaleDateString('fr-FR', options);
 	today = today.toLocaleDateString('fr-FR', options);
-	class Plat {
-		constructor(nom, descr) {
-			this.nom = nom;
-			this.description = descr;
-		}
-		
-	}
 
 	let show = false;
 	let show2 = false;
@@ -577,6 +570,33 @@
         <Button style="margin-left: 2%;" size="lg" class="{current === 'metro' ? 'selected' : ''}"
         on:click="{() => current = 'metro'}">Métronome</Button>*/-->
 		</span>
+
+		<El container class="center">
+			<El row>
+				<El col>
+					<Button class="stand1" color="primary" href="/stands/{crous}">
+						STAND 1
+					</Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
+				</El>
+			</El>
+			<El row>
+				<El col>
+					<Button class="stand2" color="primary" href="/stands/{crous}">
+						STAND 2
+					</Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
+				</El>
+			</El>
+			<El row>
+				<El col>
+					<Button class="stand3" color="primary" href="/stands/{crous}">
+						STAND 3
+					</Button>
+					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
+				</El>
+			</El>
+		</El>
 
 	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show}>
 		<ModalHeader>
