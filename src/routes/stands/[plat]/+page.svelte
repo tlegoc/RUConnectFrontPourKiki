@@ -9,12 +9,27 @@
     let plat = "";
 
     onMount(async () => {
-        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/strasbourg`);
+
+        // Data from previous selection
+        var ville = "strasbourg";
+        var id = "r550";
+        var date = "2024-04-22";
+
+        // Getting the menu from the API
+        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${ville}`);
         res = await res.text();
-        const cdataContent = res.match(/<!\[CDATA\[(.*?)\]\]>/s)[1];
         var domParser = new DOMParser();
-        var doc = domParser.parseFromString(cdataContent, 'text/html');
-            // Initialize titlesStand array with empty arrays
+        var menu = domParser.parseFromString(res, 'text/html');
+
+        // Parsing the right restaurant and date in the XML file
+        var menuToText = menu.querySelector(`resto[id="${id}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        
+        // Cleaning the text
+        menuToText = menuToText.substring(12, menuToText.length - 8);
+        menuToText = menuToText.replace(/<h2-->/g, '<h2>');
+        var doc = domParser.parseFromString(menuToText, 'text/html');
+        
+        // Initialize titlesStand array with empty arrays
         for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
             titlesStand.push([]);
         }

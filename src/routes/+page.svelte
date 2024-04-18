@@ -12,10 +12,11 @@
 		Popover,
 		PopoverBody, Status
 	} from 'yesvelte'
+	import { onMount } from 'svelte';
+    import { Card, CardBody, CardTitle } from 'yesvelte'
 	import TempsQueue from "./queue/TempsQueue.svelte";
 	import {connected} from './stores.js';
 	import {goto} from '$app/navigation';
-	import { onMount } from "svelte";
 	let current = 'astro'
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
@@ -33,9 +34,6 @@
 		}
 		
 	}
-	let plat1 = new Plat("hamburger", "c'est bon hein");
-	let plat2 = new Plat("haricot", "c'est bon hein");
-	let plat3 = new Plat("potimaron", "c'est bon hein");
 
 	let show = false;
 	let show2 = false;
@@ -49,9 +47,11 @@
 		if(!show2)toggleModal();
 	}
 
-	function changeRU(nomRU) {
+	function changeRU(nomRU, index) {
 		actualRU = nomRU;
+		idResto = restosId[index];
 		toggleModal();
+		load_menu();
 	}
 
 	function changeCity(cityName) {
@@ -376,7 +376,9 @@
 	let ip = "";
 	let city = "Rennes";
 	let crous = "rennes";
+	let idResto = "r550";
 	let restos = ["Resto U' Astrolabe"];
+	let restosId = [];
 
 	function getRUs(){
 		const queryParams = new URLSearchParams({ get_ids: true });
@@ -387,8 +389,10 @@
 				var doc = domParser.parseFromString(test, 'text/xml');
 				let balises = doc.getElementsByTagName("resto");
 				restos = [];
+				restosId = [];
 				for (let i = 0; i < balises.length; i++) {
 					if(balises[i].getAttribute("type") === "Restaurant"){
+						restosId.push(balises[i].getAttribute("id"));
 						restos.push(balises[i].getAttribute("title"));
 					}
 				}
@@ -412,6 +416,7 @@
 				.then(data => {
 					city = data.city;
 					crous = ville_crous[city];
+					load_menu();
 					console.log(city);
 					console.log(crous);
 				}).catch(error => {
@@ -420,6 +425,119 @@
 
 		getRUs();
 	});
+
+    let titlesHour = [];
+    let titlesStand = [[]];
+    let mealNames = [[]];
+    let plat = "";
+
+    onMount(async () => {
+
+        // Data from previous selection
+        var date = "2024-04-22";
+
+        // Getting the menu from the API
+        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
+        res = await res.text();
+        var domParser = new DOMParser();
+        var menu = domParser.parseFromString(res, 'text/html');
+
+        // Parsing the right restaurant and date in the XML file
+        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        
+        // Cleaning the text
+        menuToText = menuToText.substring(12, menuToText.length - 8);
+        menuToText = menuToText.replace(/<h2-->/g, '<h2>');
+        var doc = domParser.parseFromString(menuToText, 'text/html');
+        
+        // Initialize titlesStand array with empty arrays
+        for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
+            titlesStand.push([]);
+        }
+        for (let i = 0; i < doc.getElementsByTagName('ul').length; i++) {
+            mealNames.push([]);
+        }
+
+        var nextNode = null;
+        var nextNodeMeal = null;
+        var j = 0;
+        var w = 0;
+        //H2 titles
+        for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
+            titlesHour.push(doc.getElementsByTagName('h2')[i].innerHTML);
+            nextNode = doc.getElementsByTagName('h2')[i].nextSibling;
+            while(nextNode.tagName != "H2"){
+
+                if(nextNode.tagName == "H4"){
+                    titlesStand[i][j] = nextNode.innerHTML;  
+                    j++;
+                    nextNodeMeal = nextNode.nextSibling;
+                    //console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
+                    mealNames[i][j] = Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML).join(" ");
+                    console.log(mealNames[i][j]);
+                }
+                nextNode = nextNode.nextSibling;
+            }
+            j = 0;
+        }
+
+        
+        plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
+    });
+    
+	async function load_menu(){
+		// Data from previous selection
+        var date = "2024-04-18";
+
+        // Getting the menu from the API
+        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
+        res = await res.text();
+        var domParser = new DOMParser();
+        var menu = domParser.parseFromString(res, 'text/html');
+
+        // Parsing the right restaurant and date in the XML file
+        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        
+        // Cleaning the text
+        menuToText = menuToText.substring(12, menuToText.length - 8);
+        menuToText = menuToText.replace(/<h2-->/g, '<h2>');
+        var doc = domParser.parseFromString(menuToText, 'text/html');
+        
+        // Initialize titlesStand array with empty arrays
+        for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
+            titlesStand.push([]);
+        }
+        for (let i = 0; i < doc.getElementsByTagName('ul').length; i++) {
+            mealNames.push([]);
+        }
+
+        var nextNode = null;
+        var nextNodeMeal = null;
+        var j = 0;
+        var w = 0;
+        //H2 titles
+        for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
+            titlesHour.push(doc.getElementsByTagName('h2')[i].innerHTML);
+            nextNode = doc.getElementsByTagName('h2')[i].nextSibling;
+            while(nextNode.tagName != "H2"){
+
+                if(nextNode.tagName == "H4"){
+                    titlesStand[i][j] = nextNode.innerHTML;  
+                    j++;
+                    nextNodeMeal = nextNode.nextSibling;
+                    //console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
+                    mealNames[i][j] = Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML).join(" ");
+                    console.log(mealNames[i][j]);
+                }
+                nextNode = nextNode.nextSibling;
+            }
+            j = 0;
+        }
+
+        
+        plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
+	}
+	
 </script>
 
 <main>
@@ -460,33 +578,6 @@
         on:click="{() => current = 'metro'}">Métronome</Button>*/-->
 		</span>
 
-		<El container class="center">
-			<El row>
-				<El col>
-					<Button class="stand1" color="primary" href="/stands/{plat1.nom}">
-						STAND 1
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-			<El row>
-				<El col>
-					<Button class="stand2" color="primary" href="/stands/{plat2.nom}">
-						STAND 2
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-			<El row>
-				<El col>
-					<Button class="stand3" color="primary" href="/stands/{plat3.nom}">
-						STAND 3
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-		</El>
-
 	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show}>
 		<ModalHeader>
 			<ModalTitle style="width: 100%">
@@ -494,8 +585,8 @@
 			</ModalTitle>
 		</ModalHeader>
 		<ModalBody class="center">
-			{#each restos as ru}
-				<Button color="info" on:click={() =>(changeRU(ru))} style="margin-bottom: 5px">
+			{#each restos as ru, index}
+				<Button color="info" on:click={() =>(changeRU(ru, index))} style="margin-bottom: 5px">
 					{ru}
 				</Button>
 				<br>
@@ -518,6 +609,20 @@
 			{/each}
 		</ModalBody>
 	</Modal>
+
+	<div class="center" style="height: 50vh;">
+        {#each titlesHour as title, indexHour}
+            <Card>
+                <CardBody>
+                    <CardTitle style="font-weight: bold; font-size: 2em">{title}</CardTitle>
+                        {#each titlesStand[indexHour] as titleStd, indexStand}
+                            <h3>{titleStd}</h3>
+                            <p>{mealNames[indexHour][indexStand+1]}</p>
+                        {/each}
+                </CardBody>
+            </Card>
+        {/each}
+    </div>
 
 
 
