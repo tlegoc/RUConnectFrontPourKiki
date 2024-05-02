@@ -556,7 +556,7 @@
 </script>
 
 <main>
-	<div class="center" style="margin-top: -50px">
+	<div class="center">
 		<ButtonGroup>
 			<Button on:click={
 						() => {
