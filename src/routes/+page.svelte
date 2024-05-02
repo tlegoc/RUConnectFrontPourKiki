@@ -17,16 +17,13 @@
 	import TempsQueue from "./queue/TempsQueue.svelte";
 	import {connected} from './stores.js';
 	import {goto} from '$app/navigation';
-	let current = 'astro'
+
 	let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
 	let today  = new Date();
-	let tomorrow = new Date(today);
-	tomorrow.setDate(today.getDate() + 1);
-	let aftertomorrow = new Date(tomorrow);
-	aftertomorrow.setDate(tomorrow.getDate() + 1);
-	tomorrow = tomorrow.toLocaleDateString('fr-FR', options);
-	aftertomorrow = aftertomorrow.toLocaleDateString('fr-FR', options);
+	let actualDate = today.toISOString().split('T')[0];
 	today = today.toLocaleDateString('fr-FR', options);
+	let indexDate = 0;
+
 
 	let show = false;
 	let show2 = false;
@@ -429,7 +426,6 @@
     onMount(async () => {
 
         // Data from previous selection
-        var date = "2024-05-02";
 
         // Getting the menu from the API
         var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
@@ -438,7 +434,7 @@
         var menu = domParser.parseFromString(res, 'text/html');
 
         // Parsing the right restaurant and date in the XML file
-        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`).innerHTML;
         
         // Cleaning the text
         menuToText = menuToText.substring(12, menuToText.length - 8);
@@ -485,8 +481,6 @@
     });
     
 	async function load_menu(){
-		// Data from previous selection
-        var date = "2024-05-02";
 
         // Getting the menu from the API
         var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
@@ -495,7 +489,7 @@
         var menu = domParser.parseFromString(res, 'text/html');
 
         // Parsing the right restaurant and date in the XML file
-        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`).innerHTML;
         
         // Cleaning the text
         menuToText = menuToText.substring(12, menuToText.length - 8);
@@ -543,14 +537,74 @@
 		<ButtonGroup>
 			<Button on:click={
 						() => {
-							today = new Date();
-							today = today.toLocaleDateString('fr-FR', options);
+							if(indexDate === 0){
+								today = new Date();
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
+							else if(indexDate === 1){
+								today = new Date();
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								indexDate = 0;
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
+							else if(indexDate === 2){
+								today = new Date();
+								today.setDate(today.getDate() + 1);
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								indexDate = 1;
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
 						}
 					} ghost color="dark" ><Icon name="chevron-left"/></Button>
 			<p style="margin-top: 15px">{today}</p>
 			<Button on:click={
 						() => {
-							today = aftertomorrow;
+							if(indexDate === 0){
+								today = new Date();
+								today.setDate(today.getDate() + 1);
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								indexDate = 1;
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
+							else if(indexDate === 1){
+								today = new Date();
+								today.setDate(today.getDate() + 2);
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								indexDate = 2;
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
+							else if(indexDate === 2){
+								today = new Date();
+								today.setDate(today.getDate() + 2);
+								actualDate = today.toISOString().split('T')[0];
+								today = today.toLocaleDateString('fr-FR', options);
+								indexDate = 2;
+								titlesHour = [];
+								titlesStand = [[]];
+								mealNames = [[]];
+								load_menu();
+							}
 						}
 					} ghost color="dark"><Icon name="chevron-right"/></Button>
 		</ButtonGroup>
