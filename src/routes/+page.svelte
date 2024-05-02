@@ -43,6 +43,8 @@
 	function changeRU(nomRU, index) {
 		actualRU = nomRU;
 		idResto = restosId[index];
+		titlesHour = [];
+		titlesStand = [[]];
 		toggleModal();
 		load_menu();
 	}
@@ -427,7 +429,7 @@
     onMount(async () => {
 
         // Data from previous selection
-        var date = "2024-04-22";
+        var date = "2024-05-02";
 
         // Getting the menu from the API
         var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
@@ -444,6 +446,10 @@
         var doc = domParser.parseFromString(menuToText, 'text/html');
         
         // Initialize titlesStand array with empty arrays
+		// Empty all arrays
+		titlesHour = [];
+		titlesStand = [[]];
+		mealNames = [[]];
         for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
             titlesStand.push([]);
         }
@@ -480,7 +486,7 @@
     
 	async function load_menu(){
 		// Data from previous selection
-        var date = "2024-04-18";
+        var date = "2024-05-02";
 
         // Getting the menu from the API
         var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/${crous}`);
@@ -520,7 +526,6 @@
                     nextNodeMeal = nextNode.nextSibling;
                     //console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
                     mealNames[i][j] = Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML).join(" ");
-                    console.log(mealNames[i][j]);
                 }
                 nextNode = nextNode.nextSibling;
             }
@@ -571,32 +576,6 @@
         on:click="{() => current = 'metro'}">Métronome</Button>*/-->
 		</span>
 
-		<El container class="center">
-			<El row>
-				<El col>
-					<Button class="stand1" color="primary" href="/stands/{crous}">
-						STAND 1
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-			<El row>
-				<El col>
-					<Button class="stand2" color="primary" href="/stands/{crous}">
-						STAND 2
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-			<El row>
-				<El col>
-					<Button class="stand3" color="primary" href="/stands/{crous}">
-						STAND 3
-					</Button>
-					<!--<Button class="pencil" color="green" href = "../add_meal"><Icon name="pencil"/></Button>-->
-				</El>
-			</El>
-		</El>
 
 	<Modal size="lg" scrollable backdrop={false} placement="center" bind:show={show}>
 		<ModalHeader>
