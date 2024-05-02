@@ -434,7 +434,15 @@
         var menu = domParser.parseFromString(res, 'text/html');
 
         // Parsing the right restaurant and date in the XML file
-        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`).innerHTML;
+        try{
+			var menuXML = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`)
+		}
+		catch(e){
+			console.log("Erreur");
+		}
+
+		if(menuToText != null){
+			var menuToText = menuXML.innerHTML;
         
         // Cleaning the text
         menuToText = menuToText.substring(12, menuToText.length - 8);
@@ -478,7 +486,12 @@
 
         
         plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
+	}
+	else{
+		titlesHour.push("Pas de menu disponible");
+	}
     });
+	
     
 	async function load_menu(){
 
@@ -489,7 +502,16 @@
         var menu = domParser.parseFromString(res, 'text/html');
 
         // Parsing the right restaurant and date in the XML file
-        var menuToText = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`).innerHTML;
+		try{
+			var menuXML = menu.querySelector(`resto[id="${idResto}"]`).querySelector(`menu[date="${actualDate}"]`)
+		}
+		catch(e){
+			console.log("Erreur");
+		}
+
+		if(menuXML != null){
+			console.log(menuXML);
+			var menuToText = menuXML.innerHTML;
         
         // Cleaning the text
         menuToText = menuToText.substring(12, menuToText.length - 8);
@@ -528,6 +550,7 @@
 
         
         plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
+	}
 	}
 	
 </script>
@@ -664,18 +687,26 @@
 	</Modal>
 
 	<div class="center" style="height: 50vh;">
-        {#each titlesHour as title, indexHour}
-            <Card>
-                <CardBody>
-                    <CardTitle style="font-weight: bold; font-size: 2em">{title}</CardTitle>
-                        {#each titlesStand[indexHour] as titleStd, indexStand}
-                            <h3>{titleStd}</h3>
-                            <p>{mealNames[indexHour][indexStand+1]}</p>
-                        {/each}
-                </CardBody>
-            </Card>
-        {/each}
-    </div>
+		{#if titlesHour.length === 0}
+			<Card>
+				<CardBody>
+					<CardTitle style="font-weight: bold; font-size: 2em">Pas de menu disponible</CardTitle>
+				</CardBody>
+			</Card>
+		{:else}
+			{#each titlesHour as title, indexHour}
+				<Card>
+					<CardBody>
+						<CardTitle style="font-weight: bold; font-size: 2em">{title}</CardTitle>
+							{#each titlesStand[indexHour] as titleStd, indexStand}
+								<h3>{titleStd}</h3>
+								<p>{mealNames[indexHour][indexStand+1]}</p>
+							{/each}
+					</CardBody>
+				</Card>
+			{/each}
+		{/if}
+	</div>
 
 
 
