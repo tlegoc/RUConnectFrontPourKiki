@@ -27,9 +27,9 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 # Description du projet
 
 ## Ambition
-- interaction extÃ©rieures, architecture interne
-- caractÃ©ristiques fonctionnelles de l'application
 - positionnement par rapport Ã  l'Ã©tat de l'art
+
+### 📐 Intéractions extérieures et architecture interne :
 
 ### 💻 Les fonctionnalitées :
 - Créer un compte et pouvoir se connecter
@@ -38,9 +38,9 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 - Consulter le menu du jour en fonction du RU sélectionné.
 - Choisir si l'on veut le menu d'aujourd'hui, de demain ou d'après-demain.
 - Accéder à son profil et mettre à jour ses informations (changement de nom et état dans la queue).
-- Accéder aux états dans la queue des amis.
+- /*Accéder aux états dans la queue des amis.*/
 
-### Les pages et composants de l'application :
+### Les pages et composants de l'application
 
 #### 🔄 **Création de compte :**
 Première page lorsqu'on arrive sur le site web où l'utilisateur doit se créer un compte s'authentifier avec son id unique et son mot de passe.
@@ -52,24 +52,29 @@ Première page lorsqu'on arrive sur le site web où l'utilisateur doit s'authent
 Cette page vous renseigne sur le menu du jour en sélectionnant une ville que vous voulez puis en sélectionnant un RU dans cette même ville. Le menu est donc mis à jour à chaque fois que vous changer de Resturant Universitaire.
 En cliquant sur l’image en haut à droite (Ici marquée “PS”) vous accédez à votre profil.
 
+#### 🍔 **Menus :**
+Quand vous entrez dans la première fois sur la page d'accueil de RU-Connect, le menu affiché sera celui du premier RU de votre ville où vous êtes actuellement. Ensuite, dans le cas où le menu d'un autre RU de cette même ville vous intéresse, vous pouvez cliquer sur le bouton à côté du nom du RU pour pouvoir changer de restaurant. Il est aussi possible de changer de ville et il vous faudra donc cliquer sur le bouton à côté du nom de la ville puis sélectionner un RU dans cette ville. Finalement, le menu affiché changera lors de vos différentes sélections.
+
 #### 🙋‍♀️ **Profil de l'utilisateur connecté :**
-Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le profil de l'utilisateur connecté. Sur ce dernier, il a accès à ses informations personnelles (nom, prénom, âge), et surtout il peut les modififier. Ces nouvelles informations seront ainsi modifiées sur toutes les pages où on peut les voir. L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.
+Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le profil de l'utilisateur connecté. Sur ce dernier, il a accès à ses informations personnelles (nom, prénom, âge), et surtout il peut les modififier. Ces nouvelles informations seront ainsi modifiées sur toutes les pages où on peut les voir. /*L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.*/
 
 #### 🍽 **Swipe & Taste :**
 Lors de la création de compte, l'utilisateur doit passer par cette page. Une liste d’ingrédients va défiler devant l’utilisateur, et ce dernier va pouvoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire.
 
-
-
+### 🔭 Positionnement par rapport à l'état de l'art :
 
 ## Statut du projet
 
 ## Analyse critique
-- difficultÃ©s
-- prise de recul, leÃ§ons apprises
 
+### ⚠️ Difficultés :
+
+### 💡 Prise de recul et leçons apprises :
 
 # Conclusion
-- retour d'expÃ©rience
-- conseils Ã  de nouveaux arrivants
+
+### 👦 Retour d'expérience :
+
+### 👊 Conseils aux nouveaux arrivants :
 
 # Bibliographie
