@@ -92,13 +92,36 @@ Positionnement : RU-Connect se démarque en offrant des fonctionnalités de pers
 ## Analyse critique
 
 ### ⚠️ Difficultés :
+Le développement de RU-Connect a été confronté à plusieurs défis qui ont entravé sa progression. Certains membres ne peuvent pas consacrer à plein temps à RU-Connect en raison d'autres obligations, créant ainsi des déséquilibres dans la répartition des tâches et des retards dans l'avancement du projet. De plus, le groupe a été divisé en deux après le deuxième semestre dans le cas des études à l'étranger.
+
+Sur le plan technique, nous avons rencontré des difficultés avec l'interaction avec le back-end de l'application dû à notre manque de connaissances en développement web.
+
+Ensuite, l'intérêt limité des membres du groupe pour le développement web a pu affecter notre motivation et notre engagement dans le projet, compromettant ainsi la qualité du travail et la productivité de l'équipe. Il y a aussi eu des difficultés à estimer de manière réaliste la charge de travail nécessaire pour chaque tâche.
+
+Enfin, la communication difficile avec le CROUS après plusieurs relances lors des 2 années de production a constitué un obstacle supplémentaire, limitant l'accès à des ressources sur les menus des RU de France.
 
 ### 💡 Prise de recul et leçons apprises :
+Tout d'abord, nous reconnaissons l'importance de l'établissement de sprints dans la gestion de projet. Cette approche itérative aurait pu nous aider à mieux structurer notre travail
+
+Par ailleurs, nous réalisons l'importance de maîtriser davantage les technologies web dès le départ du projet. Une meilleure compréhension de ces technologies aurait facilité le développement du projet.
+
+Une leçon importante que nous tirons également est notre capacité à estimer la charge de travail nécessaire pour chaque fonctionnalité ce qui nous permettra plus tard de planifier de manière plus réaliste nos tâches et nos délais.
+
+Enfin, nous retenons la nécessité d'une répartition efficace des tâches au sein de l'équipe. Nous avons appris à mieux comprendre les forces et les faiblesses de chaque membre de l'équipe
 
 # Conclusion
 
 ### 👦 Retour d'expérience :
+Finalement, le projet RU-Connect que nous avons élaboré dans le cadre du module d'Innovation a été une expérience très enrichissante pour chaque membre de l'équipe. C'était pour chacun d'entre nous la première fois que l'on s'engageait sur un projet aussi long sur deux années et cela nous a permis de mieux comprendre le déroulement d'un projet conséquent. Nous avons aussi aimé la liberté que nous a laissé la matière dans le choix du sujet et des technologies pour réaliser notre projet. 
 
 ### 👊 Conseils aux nouveaux arrivants :
+1. Apprendre à utiliser Svelte et AWS pour comprendre le projet.
+2. Simplifier le code du projet pour une meilleure compréhension.
+3. Etendre le projet en créant une version mobile.
+4. Continuer à essayer de contacter le CROUS Bretagne en passant par la plateforme Datagouv.fr.
+5. Peut être contacté l'Université directement pour avoir un soutien dans la discussion.*
+6. Créer un formulaire à l'attention des étudiants pour qu'il puisse exprimer leurs besoins et leurs avis sur l'application.
+7. Voir moins grand en nombre de fonctionnalités en essayant d'avoir un premier produit fonctionnel tout en gardant une structure permettant des améliorations.
+8. Bien distribuer le travail pour éviter que certains membres attendent une fonctionnalité prenant 1 mois à être codé pour commencer. 
 
 # Bibliographie
