@@ -48,8 +48,8 @@
     function showFriendModal(friend){
         shownFriend = friend;
         showFriend = true;
-        console.log(shownFriend);
-        console.log(showFriend);
+        //console.log(shownFriend);
+        //console.log(showFriend);
     }
 
     usernameS.subscribe((value) => {
@@ -67,7 +67,7 @@
 
         try {
             const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-            console.log(idToken);
+            console.log("Id token: " + idToken);
             TOKEN_ID = idToken;
             TOKEN_ACCESS = accessToken;
 
@@ -78,30 +78,33 @@
 
     function addFriend(friend){
         const queryParams = new URLSearchParams({ action: "add", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
-                'Authorization': 'Bearer ' + TOKEN_ID
+                'Authorization': 'Bearer ' + TOKEN_ID,
             },
+            method: "POST",
         })
         getFriends();
     }
 
     function acceptFriend(friend){
         const queryParams = new URLSearchParams({ action: "accept", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
                 'Authorization': 'Bearer ' + TOKEN_ID
             },
+            method: "POST",
         })
         getFriends();
     }
 
     function removeFriend(friend){
         const queryParams = new URLSearchParams({ action: "remove", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
-                'Authorization': 'Bearer ' + TOKEN_ID
+                'Authorization': 'Bearer ' + TOKEN_ID,
             },
+            method: "POST",
         })
         getFriends();
     }
@@ -114,7 +117,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
             });
     }
 

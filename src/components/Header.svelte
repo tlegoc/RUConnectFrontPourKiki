@@ -10,7 +10,7 @@
         try {
             await signOut();
             connected.update((value) => false);
-            console.log("signed out");
+            // console.log("signed out");
             goto("/login");
         } catch (error) {
             console.log("error signing out: ", error);

@@ -15,7 +15,7 @@
 				loginWith: {
 						redirectSignIn: ['http://localhost:5173/'],
 						redirectSignOut: ['http://localhost:5173/login'],
-						responseType: 'token' // or 'code', note that REFRESH token will only be generated when the responseType is code
+						// responseType: 'token' // or 'code', note that REFRESH token will only be generated when the responseType is code
 					}
 				}
 			}
