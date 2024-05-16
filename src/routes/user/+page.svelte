@@ -13,6 +13,7 @@
     } from 'yesvelte'
     import {connected, usernameS} from "../stores.js";
     import {onMount} from "svelte";
+    import { fetchAuthSession } from 'aws-amplify/auth';
 
     let pseudo = "Kilian";
     let inRU = "Dans la queue";
@@ -22,6 +23,9 @@
     let allPseudos = ["Rémi", "Julie", "Théo", "Ariane", "Kilian", "Benoit", "Melanie", "Axel", "Olivier"];
     let filteredPseudos = [];
     let shownFriend = "";
+    let TOKEN_ID = "";
+    let TOKEN_ACCESS = "";
+    let friendRequests = ["Moumoulamouette"];
 
     function RU() {
         inRU = "Dans le RU";
@@ -60,7 +64,59 @@
             .then(data => {
                 allPseudos = data;
             });
+
+        try {
+            const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
+            console.log(idToken);
+            TOKEN_ID = idToken;
+            TOKEN_ACCESS = accessToken;
+
+        } catch (err) {
+            console.log(err);
+        }
     });
+
+    function addFriend(friend){
+        const queryParams = new URLSearchParams({ action: "add", friendname: friend});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID
+            },
+        })
+        getFriends();
+    }
+
+    function acceptFriend(friend){
+        const queryParams = new URLSearchParams({ action: "accept", friendname: friend});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID
+            },
+        })
+        getFriends();
+    }
+
+    function removeFriend(friend){
+        const queryParams = new URLSearchParams({ action: "remove", friendname: friend});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID
+            },
+        })
+        getFriends();
+    }
+
+    function getFriends(){
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/self`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+            });
+    }
 
 </script>
 
@@ -80,7 +136,7 @@
             <!--<input type="text" class="XS" value={pseudo ?? "Pseudo"} size=5 oninput="this.size = this.value.length/1.7 +1" style="border-color:rgba(0,0,0,0); background: rgba(0,0,0,0); margin-bottom: 25px;"/>-->
             <!--<Icon name="edit" style="margin-left:-1vw;"/>-->
         </span>
-        <h3 style="margin-bottom: 5px">Je suis</h3>
+        <h3 class="XXS" style="margin-bottom: 5px">Je suis</h3>
         <div class="center">
                 <div class="tw-toggle">
                     <input type="radio" name="toggle" value="false" on:click={Dehors} style="height: 25px; width:25px">
@@ -129,10 +185,23 @@
         </div>
 
     </div>
+
         <Button color="primary" class="XXS" on:click={() => (show = !show)}>
             <Icon name="plus" />Ajouter
         </Button>
-</div>
+
+        <h2 class="title" style="margin-top: 20px">DEMANDES</h2>
+        <div class="center">
+        {#if friendRequests.length === 0}
+            <p>Vous n'avez pas de nouvelles demandes d'amis.</p>
+        {:else }
+            {#each friendRequests as fr}
+                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success"><Icon name="plus"/></Button> <Button size="sm" color="red"><Icon name="x"/></Button></div>
+            {/each}
+        {/if}
+
+
+        </div>
 
     <Modal scrollable title="Mais où sont mes amis ??" placement="center" bind:show>
         <ModalBody>
@@ -141,8 +210,7 @@
             </Input>
             <div class="center XS">
             {#each filteredPseudos as fr}
-                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success"><Icon name="plus"/></Button></div>
-
+                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success" on:click={addFriend(fr)}><Icon name="plus"/></Button></div>
             {/each}
             </div>
         </ModalBody>
@@ -157,10 +225,11 @@
                 <Avatar size="lg">{shownFriend.slice(0,2)}</Avatar>
                 <h3>{shownFriend}</h3>
             </div>
-            <div class="center"><Button color="warning" >Retirer</Button></div>
+            <div class="center"><Button color="warning" on:click={removeFriend(shownFriend)}>Retirer</Button></div>
             <div class="center"><Button me="auto" on:click={() => (showFriend = false)}>Fermer</Button></div>
         </ModalBody>
     </Modal>
+    </div>
 </main>
 
 <style>

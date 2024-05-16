@@ -686,24 +686,28 @@
 		</ModalBody>
 	</Modal>
 
-	<div class="center" style="height: 50vh;">
+	<div class="center" style="min-height: 45vh;">
 		{#if titlesHour.length === 0}
-			<Card>
-				<CardBody>
-					<CardTitle style="font-weight: bold; font-size: 2em">Pas de menu disponible</CardTitle>
-				</CardBody>
-			</Card>
-		{:else}
-			{#each titlesHour as title, indexHour}
+			<El colLg="4" colMd="6" offsetLg="4" offsetMd="2">
 				<Card>
 					<CardBody>
-						<CardTitle style="font-weight: bold; font-size: 2em">{title}</CardTitle>
-							{#each titlesStand[indexHour] as titleStd, indexStand}
-								<h3>{titleStd}</h3>
-								<p>{mealNames[indexHour][indexStand+1]}</p>
-							{/each}
+						<CardTitle style="font-weight: bold; font-size: 2em">Pas de menu disponible</CardTitle>
 					</CardBody>
 				</Card>
+			</El>
+		{:else}
+			{#each titlesHour as title, indexHour}
+				<El colLg="4" colMd="6" offsetLg="4" offsetMd="2">
+					<Card>
+						<CardBody>
+							<CardTitle style="font-weight: bold; font-size: 2em">{title}</CardTitle>
+								{#each titlesStand[indexHour] as titleStd, indexStand}
+									<h3>{titleStd}</h3>
+									<p>{mealNames[indexHour][indexStand+1]}</p>
+								{/each}
+						</CardBody>
+					</Card>
+				</El>
 			{/each}
 		{/if}
 	</div>
