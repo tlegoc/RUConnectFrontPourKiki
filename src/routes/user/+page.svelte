@@ -78,30 +78,33 @@
 
     function addFriend(friend){
         const queryParams = new URLSearchParams({ action: "add", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
-                'Authorization': 'Bearer ' + TOKEN_ID
+                'Authorization': 'Bearer ' + TOKEN_ID,
             },
+            method: "POST",
         })
         getFriends();
     }
 
     function acceptFriend(friend){
         const queryParams = new URLSearchParams({ action: "accept", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
                 'Authorization': 'Bearer ' + TOKEN_ID
             },
+            method: "POST",
         })
         getFriends();
     }
 
     function removeFriend(friend){
         const queryParams = new URLSearchParams({ action: "remove", friendname: friend});
-        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friend/?${queryParams}`, {
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/friends?${queryParams}`, {
             headers: {
-                'Authorization': 'Bearer ' + TOKEN_ID
+                'Authorization': 'Bearer ' + TOKEN_ID,
             },
+            method: "POST",
         })
         getFriends();
     }
