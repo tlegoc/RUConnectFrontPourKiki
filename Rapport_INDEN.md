@@ -17,7 +17,12 @@ Dans un premier temps, nous avons commencé par vérifier que le site du Crous n
 
 → Amélioration possible : mettre à jour les informations sur les menus en fonction du jour et des plats proposés, ainsi que du RU sélectionné.
 
+Au cours de nos recherches, nous avons aussi découvert une application mobile du Crous. Cette dernière propose des informations sur les logements, les offres d’emploi, les bourses, et normalement les menus, mais ces derniers sont très peu mis à jour, ou pas remplis, et l'application est peu intuitive à utiliser.
 
+→ Point positif : déjà l’idée de mettre en ligne les menus chaque jour, mais peu mis à jour  
+→ Amélioration possible : cibler les informations sur les menus et rendre l'application plus intuitive à utiliser.
+
+Nous avons aussi cherché d’autres applications qui pourraient présenter des similitudes avec notre projet, sans forcément être axés sur les restaurants universitaires. Nous avons trouvé OuiLaCarte, une application pour les restaurants qui permet d'avoir accès au menu sur téléphone au lieu de sur papier : les clients scannent un QR Code et ont accès au menu. Cette mise en ligne des menus est proche du service que nous souhaitons proposer. Il y a bien sûr  un écart par rapport à la problématique posée sur notre projet car OuiLaCarte est axée sur la restauration et propose des fonctionnalités de commande en ligne qui ne sont pas nécessaires dans le cadre de notre projet. 
 
 # Description du projet
 
