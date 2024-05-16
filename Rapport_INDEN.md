@@ -27,7 +27,6 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 # Description du projet
 
 ## Ambition
-- positionnement par rapport Ã  l'Ã©tat de l'art
 
 ### 📐 Intéractions extérieures et architecture interne :
 
@@ -49,7 +48,7 @@ Première page lorsqu'on arrive sur le site web où l'utilisateur doit se créer
 Première page lorsqu'on arrive sur le site web où l'utilisateur doit s'authentifier avec son pseudo et son mot de passe.
 
 #### 🏠 **Accueil :**
-Cette page vous renseigne sur le menu du jour en sélectionnant une ville que vous voulez puis en sélectionnant un RU dans cette même ville. Le menu est donc mis à jour à chaque fois que vous changer de Resturant Universitaire.
+Cette page vous renseigne sur le menu du jour et vous permet de choisir le menu affiché en fonction de la ville, du RU et de la date.
 En cliquant sur l’image en haut à droite (Ici marquée “PS”) vous accédez à votre profil.
 
 #### 🍔 **Menus :**
@@ -63,18 +62,29 @@ Lors de la création de compte, l'utilisateur doit passer par cette page. Une li
 
 ### 🔭 Positionnement par rapport à l'état de l'art :
 
+Le positionnement de RU-Connect par rapport à l'état de l'art repose sur plusieurs axes principaux, reflétant à la fois les lacunes observées dans les solutions existantes et les avantages offerts notre application.
+
+**Mise à jour et pertinence des informations :**
+
+Constat : Le site web et l'application mobile du Crous, présentent des lacunes en ce qui concerne la mise à jour et la pertinence des informations sur les menus des restaurants universitaires.  
+
+Positionnement : RU-Connect se positionne en offrant une solution où les menus sont actualisés quotidiennement en fonction du jour et des plats proposés dans chaque restaurant universitaire. Cette actualisation en temps réel garantit aux utilisateurs des informations précises et pertinentes sur les repas disponibles.
+
+**Accessibilité et convivialité de l'application :**
+
+Constat : Les applications existantes souffrent souvent d'une faible convivialité et d'une navigation peu intuitive.  
+
+Positionnement : RU-Connect se distingue en proposant une interface utilisateur plus attirante et intuitive. Les fonctionnalités telles que la sélection de la ville, du restaurant universitaire, et la consultation des menus sont conçues pour être facilement accessibles.  
+
+**Personnalisation et interaction utilisateur :**
+
+Constat : Les solutions existantes offrent des informations générales mais ne prennent pas en compte les préférences individuelles des utilisateurs. 
+
+Positionnement : RU-Connect se démarque en offrant des fonctionnalités de personnalisation telles que le "Swipe & Taste", où les utilisateurs peuvent indiquer leurs préférences alimentaires en faisant défiler une liste d'ingrédients. De plus, les utilisateurs ont la possibilité de mettre à jour leurs informations personnelles.
+
 ## Statut du projet
 
 ## Analyse critique
 
-### ⚠️ Difficultés :
-
-### 💡 Prise de recul et leçons apprises :
-
-# Conclusion
-
-### 👦 Retour d'expérience :
-
-### 👊 Conseils aux nouveaux arrivants :
-
+ 
 # Bibliographie
