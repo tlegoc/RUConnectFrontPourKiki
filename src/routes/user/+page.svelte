@@ -14,18 +14,19 @@
     import {connected, usernameS} from "../stores.js";
     import {onMount} from "svelte";
     import { fetchAuthSession } from 'aws-amplify/auth';
+    import {goto} from '$app/navigation';
 
-    let pseudo = "Kilian";
+    let pseudo = "Pseudo";
     let inRU = "Dans la queue";
-    let friendsinRU = ["Rémi", "Julie", "Théo"];
-    let friendsinqueue = ["Ariane", "Kilian", "Benoit", "Melanie"];
-    let friendshungry = ["Axel", "Olivier"];
-    let allPseudos = ["Rémi", "Julie", "Théo", "Ariane", "Kilian", "Benoit", "Melanie", "Axel", "Olivier"];
+    let friendsinRU = [];
+    let friendsinqueue = [];
+    let friendshungry = [];
+    let allPseudos = [];
     let filteredPseudos = [];
     let shownFriend = "";
     let TOKEN_ID = "";
     let TOKEN_ACCESS = "";
-    let friendRequests = ["Moumoulamouette"];
+    let friendRequests = [];
 
     function RU() {
         inRU = "Dans le RU";
@@ -42,7 +43,7 @@
     }
 
     function Dehors() {
-        inRU = "Dehors :(";
+        inRU = "A faim";
     }
 
     function showFriendModal(friend){
@@ -58,6 +59,14 @@
     let show = false;
     let showFriend = false;
 
+
+    function reloadPage() {
+        const thisPage = window.location.pathname;
+        goto('/').then(
+            () => goto(thisPage)
+        );
+    }
+
     onMount(async () => {
         await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/users`)
             .then(response => response.json())
@@ -70,10 +79,12 @@
             console.log("Id token: " + idToken);
             TOKEN_ID = idToken;
             TOKEN_ACCESS = accessToken;
+            getFriends();
 
         } catch (err) {
             console.log(err);
         }
+
     });
 
     function addFriend(friend){
@@ -84,7 +95,7 @@
             },
             method: "POST",
         })
-        getFriends();
+        reloadPage();
     }
 
     function acceptFriend(friend){
@@ -95,7 +106,7 @@
             },
             method: "POST",
         })
-        getFriends();
+        reloadPage();
     }
 
     function removeFriend(friend){
@@ -106,7 +117,7 @@
             },
             method: "POST",
         })
-        getFriends();
+        reloadPage();
     }
 
     function getFriends(){
@@ -117,7 +128,22 @@
         })
             .then(response => response.json())
             .then(data => {
-                // console.log(data);
+                //console.log(data);
+                const friends = data.friends;
+                friendsinRU = [];
+                friendsinqueue = [];
+                friendshungry = [];
+                for (let i = 0; i < friends.length; i++) {
+                    if (data.friendsstatus[friends[i]]=== "inside") {
+                        console.log(friends[i]);
+                        friendsinRU.push(friends[i]);
+                    } else if (data.friendsstatus[friends[i]]=== "inqueue") {
+                        friendsinqueue.push(friends[i]);
+                    } else if (data.friendsstatus[friends[i]]=== "out") {
+                        friendshungry.push(friends[i]);
+                    }
+                }
+                friendRequests = data.requestsfriends;
             });
     }
 
@@ -155,16 +181,25 @@
 
         <h2 class="title" style="margin-top: 20px">AMIS</h2>
         <div class="flex center XS">
+        {#if friendsinRU.length === 0 && friendsinqueue.length === 0 && friendshungry.length === 0}
+            <p>Vous n'avez pas encore d'amis. Ajoutez-en !</p>
+        {:else }
         <div style="margin-right: 10px">
+            {#if friendsinRU.length !== 0}
             <div>
                 <Badge pill ghost color="success" style="margin-right: 5px">Dans le RU</Badge>
             </div>
+            {/if}
+            {#if friendsinqueue.length !== 0}
             <div style="margin-top: 25px; margin-bottom: 25px">
                 <Badge pill ghost color="warning" style="margin-right: 5px">Dans la queue</Badge>
             </div>
+            {/if}
+            {#if friendshungry.length !== 0}
             <div>
                 <Badge pill ghost color="danger" style="margin-right: 5px">A faim</Badge>
             </div>
+            {/if}
         </div>
         <div>
             <div class="flex friendList">
@@ -186,7 +221,7 @@
                 {/each}
             </div>
         </div>
-
+        {/if}
     </div>
 
         <Button color="primary" class="XXS" on:click={() => (show = !show)}>
@@ -199,7 +234,7 @@
             <p>Vous n'avez pas de nouvelles demandes d'amis.</p>
         {:else }
             {#each friendRequests as fr}
-                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success"><Icon name="plus"/></Button> <Button size="sm" color="red"><Icon name="x"/></Button></div>
+                <div class="flex center"><p style="margin-right: 5px; margin-top: 15px">{fr}</p> <Button size="sm" color="success" on:click={acceptFriend(fr)}><Icon name="plus"/></Button> <Button size="sm" color="red" on:click={removeFriend(fr)}><Icon name="x"/></Button></div>
             {/each}
         {/if}
 
