@@ -30,6 +30,11 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 
 ### 📐 Intéractions extérieures et architecture interne :
 
+- Structure du back (AWS)
+- Structure du front (routes)
+- Requêtage
+- Sécurité
+
 ### 💻 Les fonctionnalitées :
 - Créer un compte et pouvoir se connecter
 - Swipe&Taste : L’utilisateur va faire face à plusieurs ingrédients et va devoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire.
@@ -89,6 +94,9 @@ Positionnement : RU-Connect se démarque en offrant des fonctionnalités de pers
 
 ## Statut du projet
 
+- Les fonctionnalités qui ne marchent pas
+- Possibilités d'améliorations
+
 ## Analyse critique
 
 ### ⚠️ Difficultés :
@@ -125,3 +133,19 @@ Finalement, le projet RU-Connect que nous avons élaboré dans le cadre du modul
 8. Bien distribuer le travail pour éviter que certains membres attendent une fonctionnalité prenant 1 mois à être codé pour commencer. 
 
 # Bibliographie
+
+1. Centre National des Œuvres Universitaires et Scolaires. Menus des restaurants, brasseries et cafétérias. Gouv.fr. Published September 11, 2015. Accessed May 16, 2024. https://www.data.gouv.fr/fr/datasets/menus-des-restaurants-brasseries-et-cafeterias/
+
+2. Crous Rennes Bretagne. Lyon. Published September 12, 2022. Accessed May 16, 2024. https://www.crous-rennes.fr/
+
+3. OuiLaCarte by AirK2 : une application numérique qui digitalise les menus et les cartes des CHR pour une reprise “100% safe” | Relations-Publiques.Pro : Agence RP & Attachée de presse. Relations-publiques.pro. Published 2019. Accessed May 16, 2024. https://www.relations-publiques.pro/159654/ouilacarte-by-airk2-une-application-numerique-qui-digitalise-les-menus-et-les-cartes-des-chr-pour-une-reprise-100-safe.html
+‌
+4. Svelte • Docs • Svelte. Svelte.dev. Published 2024. Accessed May 16, 2024. https://svelte.dev/docs/svelte
+
+5. Services et produits de cloud Amazon | AWS. Amazon Web Services, Inc. Published 2024. Accessed May 16, 2024. https://aws.amazon.com/fr/
+
+6. CROUS Stéphane Papon. Crous Mobile. Google.com. Published 2021. Accessed May 16, 2024. https://play.google.com/store/apps/details?id=com.einden.crous.poitiers.android&hl=fr&pli=1
+‌
+‌
+‌
+‌
