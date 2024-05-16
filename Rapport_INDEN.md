@@ -48,14 +48,19 @@ Première page lorsqu'on arrive sur le site web où l'utilisateur doit se créer
 Première page lorsqu'on arrive sur le site web où l'utilisateur doit s'authentifier avec son pseudo et son mot de passe.
 
 #### 🏠 **Accueil :**
-Cette page vous renseigne sur le menu du jour et vous permet de choisir le menu affiché en fonction de la ville, du RU et de la date.
+Cette page vous renseigne sur le menu du jour et vous permet de choisir ce qui est affiché en fonction de la ville, du restaurant et de la date.
 En cliquant sur l’image en haut à droite (Ici marquée “PS”) vous accédez à votre profil.
 
 #### 🍔 **Menus :**
-Quand vous entrez dans la première fois sur la page d'accueil de RU-Connect, le menu affiché sera celui du premier RU de votre ville où vous êtes actuellement. Ensuite, dans le cas où le menu d'un autre RU de cette même ville vous intéresse, vous pouvez cliquer sur le bouton à côté du nom du RU pour pouvoir changer de restaurant. Il est aussi possible de changer de ville et il vous faudra donc cliquer sur le bouton à côté du nom de la ville puis sélectionner un RU dans cette ville. Finalement, le menu affiché changera lors de vos différentes sélections.
+Quand vous entrez dans la première fois sur la page d'accueil de RU-Connect, le menu affiché sera celui du premier RU de votre ville où vous êtes actuellement. Ensuite, dans le cas où le menu d'un autre RU de cette même ville vous intéresse, vous pouvez cliquer sur le bouton à côté du nom du RU pour pouvoir changer de restaurant. Il est aussi possible de changer de ville et il vous faudra donc cliquer sur le bouton à côté du nom de la ville puis sélectionner un RU dans cette ville. Si vous voulez voir le menu des jours suivants, vous pouvez cliquer sur les flèches au niveau de la date pour avancer ou reculer d'une journée.
+Finalement, le menu affiché changera lors de vos différentes sélections.
 
 #### 🙋‍♀️ **Profil de l'utilisateur connecté :**
-Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le profil de l'utilisateur connecté. Sur ce dernier, il a accès à ses informations personnelles (nom, prénom, âge), et surtout il peut les modififier. Ces nouvelles informations seront ainsi modifiées sur toutes les pages où on peut les voir. /*L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.*/
+Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le profil de l'utilisateur connecté. Sur ce dernier, il a accès à ses informations personnelles mais aussi à son état dans la queue du RU. Cet état peut être modifié en 3 catégories :
+- Dans le RU
+- Dans la queue
+- A faim  
+ /*L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.*/
 
 #### 🍽 **Swipe & Taste :**
 Lors de la création de compte, l'utilisateur doit passer par cette page. Une liste d’ingrédients va défiler devant l’utilisateur, et ce dernier va pouvoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire.
@@ -80,11 +85,20 @@ Positionnement : RU-Connect se distingue en proposant une interface utilisateur 
 
 Constat : Les solutions existantes offrent des informations générales mais ne prennent pas en compte les préférences individuelles des utilisateurs. 
 
-Positionnement : RU-Connect se démarque en offrant des fonctionnalités de personnalisation telles que le "Swipe & Taste", où les utilisateurs peuvent indiquer leurs préférences alimentaires en faisant défiler une liste d'ingrédients. De plus, les utilisateurs ont la possibilité de mettre à jour leurs informations personnelles.
+Positionnement : RU-Connect se démarque en offrant des fonctionnalités de personnalisation telles que le "Swipe & Taste", où les utilisateurs peuvent indiquer leurs préférences alimentaires en faisant défiler une liste d'ingrédients. De plus, les utilisateurs ont la possibilité de mettre à jour leur état par rapport au RU.
 
 ## Statut du projet
 
 ## Analyse critique
 
- 
+### ⚠️ Difficultés :
+
+### 💡 Prise de recul et leçons apprises :
+
+# Conclusion
+
+### 👦 Retour d'expérience :
+
+### 👊 Conseils aux nouveaux arrivants :
+
 # Bibliographie
