@@ -30,6 +30,8 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 
 ### 📐 Intéractions extérieures et architecture interne :
 
+A FAIRE THEO
+
 - Structure du back (AWS)
 - Structure du front (routes)
 - Requêtage
@@ -93,6 +95,8 @@ Constat : Les solutions existantes offrent des informations générales mais ne 
 Positionnement : RU-Connect se démarque en offrant des fonctionnalités de personnalisation telles que le "Swipe & Taste", où les utilisateurs peuvent indiquer leurs préférences alimentaires en faisant défiler une liste d'ingrédients. De plus, les utilisateurs ont la possibilité de mettre à jour leur état par rapport au RU.
 
 ## Statut du projet
+
+A FAIRE THEO
 
 - Les fonctionnalités qui ne marchent pas
 - Possibilités d'améliorations
