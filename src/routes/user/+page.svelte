@@ -48,8 +48,8 @@
     function showFriendModal(friend){
         shownFriend = friend;
         showFriend = true;
-        console.log(shownFriend);
-        console.log(showFriend);
+        //console.log(shownFriend);
+        //console.log(showFriend);
     }
 
     usernameS.subscribe((value) => {
@@ -67,7 +67,7 @@
 
         try {
             const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-            console.log(idToken);
+            console.log("Id token: " + idToken);
             TOKEN_ID = idToken;
             TOKEN_ACCESS = accessToken;
 
@@ -114,7 +114,7 @@
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
             });
     }
 

@@ -9,7 +9,7 @@
     let plat = "";
 
     onMount(async () => {
-        console.log(data);
+        // //console.log(data);
         var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/`+data.nom_plat);
         res = await res.text();
         var domParser = new DOMParser();
@@ -45,9 +45,9 @@
                     titlesStand[i][j] = nextNode.innerHTML;  
                     j++;
                     nextNodeMeal = nextNode.nextSibling;
-                    //console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
+                    ////console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
                     mealNames[i][j] = Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML).join(" ");
-                    console.log(mealNames[i][j]);
+                    //console.log(mealNames[i][j]);
                 }
                 nextNode = nextNode.nextSibling;
             }
