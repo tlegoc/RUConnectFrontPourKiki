@@ -12,6 +12,7 @@
             connected.update((value) => false);
             // console.log("signed out");
             goto("/login");
+            handleAvatar();
         } catch (error) {
             console.log("error signing out: ", error);
         }
@@ -23,19 +24,35 @@
     usernameS.subscribe((value) => {
         pseudo = value.slice(0,2);
     });
+
     let avatar = null;
-    /*onMount(() => {
-        let sPath = window.location.pathname;
-        let sPage = sPath.substring(sPath.lastIndexOf('/') + 1);
-        if(sPage === "login" || sPage === "signup") {
-            avatar.disabled = true;
-            avatar.classList.remove("visible");
-            console.log(avatar.classList);
-        }else{
-            avatar.classList.add("visible");
-            avatar.classList.remove("invisible");
+
+    connected.subscribe(value => {
+        connectedVal = value;
+        if (avatar) {
+            if (connectedVal) {
+                avatar.classList.add("visible");
+                avatar.classList.remove("invisible");
+            } else {
+                avatar.classList.add("invisible");
+                avatar.classList.remove("visible");
+            }
         }
-    });*/
+    });
+
+
+    onMount(() => {
+        // Initial check on mount
+        if (avatar) {
+            if (connectedVal) {
+                avatar.classList.add("visible");
+                avatar.classList.remove("invisible");
+            } else {
+                avatar.classList.add("invisible");
+                avatar.classList.remove("visible");
+            }
+        }
+    });
 
 </script>
 

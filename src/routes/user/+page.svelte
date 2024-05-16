@@ -27,14 +27,10 @@
     let TOKEN_ID = "";
     let TOKEN_ACCESS = "";
     let friendRequests = [];
+    let toggleRU;
+    let toggleQueue;
+    let toggleOut;
 
-    function RU() {
-        inRU = "Dans le RU";
-    }
-
-    function Queue() {
-        inRU = "Dans la queue";
-    }
 
     const searchPseudos = (keyword) => {
         if(keyword!=null || keyword!==""){
@@ -42,8 +38,40 @@
         }
     }
 
+    function RU() {
+        inRU = "Dans le RU";
+        const queryParams = new URLSearchParams({ status: "inside"});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/self/status?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID,
+            },
+            method: "POST",
+        })
+        reloadPage();
+    }
+
+    function Queue() {
+        inRU = "Dans la queue";
+        const queryParams = new URLSearchParams({ status: "inqueue"});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/self/status?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID,
+            },
+            method: "POST",
+        })
+        reloadPage();
+    }
+
     function Dehors() {
         inRU = "A faim";
+        const queryParams = new URLSearchParams({ status: "out"});
+        fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/self/status?${queryParams}`, {
+            headers: {
+                'Authorization': 'Bearer ' + TOKEN_ID,
+            },
+            method: "POST",
+        })
+        reloadPage();
     }
 
     function showFriendModal(friend){
@@ -55,6 +83,10 @@
 
     usernameS.subscribe((value) => {
         pseudo = value;
+    });
+
+    connected.subscribe((value) => {
+        if(!value) goto('/login');
     });
     let show = false;
     let showFriend = false;
@@ -144,6 +176,31 @@
                     }
                 }
                 friendRequests = data.requestsfriends;
+                if(data.status === "inside"){
+                    inRU = "Dans le RU";
+                    toggleRU.checked = "-1";
+                    toggleQueue.checked  = "true";
+                    toggleOut.checked  = "false";
+                    toggleRU.checked = "true";
+                    toggleQueue.checked  = "false";
+                    toggleOut.checked  = "false";
+                } else if(data.status === "inqueue"){
+                    inRU = "Dans la queue";
+                    toggleQueue.value = "-1";
+                    toggleRU.value = "true";
+                    toggleOut.value = "false";
+                    toggleRU.checked = "false";
+                    toggleQueue.checked  = "true";
+                    toggleOut.checked  = "false";
+                } else if(data.status === "out"){
+                    inRU = "A faim";
+                    toggleOut.value = "-1";
+                    toggleQueue.value = "false";
+                    toggleRU.value = "true";
+                    toggleRU.checked = "false";
+                    toggleQueue.checked  = "false";
+                    toggleOut.checked  = "true";
+                }
             });
     }
 
@@ -168,11 +225,11 @@
         <h3 class="XXS" style="margin-bottom: 5px">Je suis</h3>
         <div class="center">
                 <div class="tw-toggle">
-                    <input type="radio" name="toggle" value="false" on:click={Dehors} style="height: 25px; width:25px">
+                    <input type="radio" name="toggle" value="false" on:click={Dehors} style="height: 25px; width:25px" bind:this={toggleOut}>
                     <label class="toggle toggle-yes"><Icon name="transfer-out" /></label>
-                    <input checked type="radio" name="toggle" value="-1" on:click={Queue} style="height: 25px; width:25px">
-                    <label class="toggle toggle-yes"><Icon name="clock" /></label>
-                    <input type="radio" name="toggle" value="true" on:click={RU} style="height: 25px; width:25px">
+                    <input checked type="radio" name="toggle" value="-1" on:click={Queue} style="height: 25px; width:25px" bind:this={toggleQueue}>
+                    <label class="toggle toggle-yes"><Icon name="clock"/></label>
+                    <input type="radio" name="toggle" value="true" on:click={RU} style="height: 25px; width:25px" bind:this={toggleRU}>
                     <label class="toggle toggle-yes"><Icon name="tools-kitchen-2" /></label>
                     <span></span>
                 </div>
@@ -343,5 +400,6 @@
     .tw-toggle input[value="-1"]:checked + label{
         color:#fff;
     }
+
 
 </style>
