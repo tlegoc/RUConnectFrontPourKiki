@@ -108,7 +108,7 @@
 
         try {
             const { accessToken, idToken } = (await fetchAuthSession()).tokens ?? {};
-            console.log("Id token: " + idToken);
+            //console.log("Id token: " + idToken);
             TOKEN_ID = idToken;
             TOKEN_ACCESS = accessToken;
             getFriends();
@@ -167,7 +167,7 @@
                 friendshungry = [];
                 for (let i = 0; i < friends.length; i++) {
                     if (data.friendsstatus[friends[i]]=== "inside") {
-                        console.log(friends[i]);
+                        //console.log(friends[i]);
                         friendsinRU.push(friends[i]);
                     } else if (data.friendsstatus[friends[i]]=== "inqueue") {
                         friendsinqueue.push(friends[i]);
@@ -175,6 +175,7 @@
                         friendshungry.push(friends[i]);
                     }
                 }
+                //console.log(data);
                 friendRequests = data.requestsfriends;
                 if(data.status === "inside"){
                     inRU = "Dans le RU";
@@ -227,21 +228,27 @@
             <p>Vous n'avez pas encore d'amis. Ajoutez-en !</p>
         {:else }
         <div style="margin-right: 10px">
-            {#if friendsinRU.length !== 0}
+
             <div>
+                {#if friendsinRU.length !== 0}
                 <Badge pill ghost color="success" style="margin-right: 5px">Dans le RU</Badge>
+                {/if}
             </div>
-            {/if}
-            {#if friendsinqueue.length !== 0}
+
+
             <div style="margin-top: 25px; margin-bottom: 25px">
+                {#if friendsinqueue.length !== 0}
                 <Badge pill ghost color="warning" style="margin-right: 5px">Dans la queue</Badge>
+                {/if}
             </div>
-            {/if}
-            {#if friendshungry.length !== 0}
+
+
             <div>
+                {#if friendshungry.length !== 0}
                 <Badge pill ghost color="danger" style="margin-right: 5px">A faim</Badge>
+                {/if}
             </div>
-            {/if}
+
         </div>
         <div>
             <div class="flex friendList">
