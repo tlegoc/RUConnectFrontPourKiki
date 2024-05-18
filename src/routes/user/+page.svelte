@@ -178,27 +178,12 @@
                 friendRequests = data.requestsfriends;
                 if(data.status === "inside"){
                     inRU = "Dans le RU";
-                    toggleRU.checked = "-1";
-                    toggleQueue.checked  = "true";
-                    toggleOut.checked  = "false";
                     toggleRU.checked = "true";
-                    toggleQueue.checked  = "false";
-                    toggleOut.checked  = "false";
                 } else if(data.status === "inqueue"){
                     inRU = "Dans la queue";
-                    toggleQueue.value = "-1";
-                    toggleRU.value = "true";
-                    toggleOut.value = "false";
-                    toggleRU.checked = "false";
-                    toggleQueue.checked  = "true";
-                    toggleOut.checked  = "false";
+                    toggleQueue.checked  = "frue";
                 } else if(data.status === "out"){
                     inRU = "A faim";
-                    toggleOut.value = "-1";
-                    toggleQueue.value = "false";
-                    toggleRU.value = "true";
-                    toggleRU.checked = "false";
-                    toggleQueue.checked  = "false";
                     toggleOut.checked  = "true";
                 }
             });
