@@ -59,7 +59,7 @@ Cette page vous renseigne sur le menu du jour et vous permet de choisir ce qui e
 En cliquant sur l’image en haut à droite (Ici marquée “PS”) vous accédez à votre profil.
 
 #### 🍔 **Menus :**
-Quand vous entrez dans la première fois sur la page d'accueil de RU-Connect, le menu affiché sera celui du premier RU de votre ville où vous êtes actuellement. Ensuite, dans le cas où le menu d'un autre RU de cette même ville vous intéresse, vous pouvez cliquer sur le bouton à côté du nom du RU pour pouvoir changer de restaurant. Il est aussi possible de changer de ville et il vous faudra donc cliquer sur le bouton à côté du nom de la ville puis sélectionner un RU dans cette ville. Si vous voulez voir le menu des jours suivants, vous pouvez cliquer sur les flèches au niveau de la date pour avancer ou reculer d'une journée.
+Quand vous entrez sur la page d'accueil de RU-Connect, le menu affiché sera celui du premier RU de votre ville où vous êtes actuellement. Ensuite, dans le cas où le menu d'un autre RU de cette même ville vous intéresse, vous pouvez cliquer sur le bouton à côté du nom du RU pour pouvoir changer de restaurant. Il est aussi possible de changer de ville et il vous faudra donc cliquer sur le bouton à côté du nom de la ville puis sélectionner un RU dans cette ville. Si vous voulez voir le menu des jours suivants, vous pouvez cliquer sur les flèches au niveau de la date pour avancer ou reculer d'une journée.
 Finalement, le menu affiché changera lors de vos différentes sélections.
 
 #### 🙋‍♀️ **Profil de l'utilisateur connecté :**
@@ -67,7 +67,8 @@ Si l'on clique sur l'icône profil de la barre de navigation, on arrive sur le p
 - Dans le RU
 - Dans la queue
 - A faim  
- /*L'utilisateur peut aussi voir son état par rapport au RU et ceux de ces amis.*/
+
+C'est également sur cette page que l'utilisateur peut voir ses amis, et leur état dans la queue du RU. Il peut ajouter, retirer et accepter des demandes d'amis.
 
 #### 🍽 **Swipe & Taste :**
 Lors de la création de compte, l'utilisateur doit passer par cette page. Une liste d’ingrédients va défiler devant l’utilisateur, et ce dernier va pouvoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire.
@@ -98,7 +99,7 @@ Positionnement : RU-Connect se démarque en offrant des fonctionnalités de pers
 
 A FAIRE THEO
 
-- Les fonctionnalités qui ne marchent pas
+- Les fonctionnalités qui ne marchent pas : Swipe & Taste, l'affluence au RU
 - Possibilités d'améliorations
 
 ## Analyse critique
@@ -153,3 +154,4 @@ Finalement, le projet RU-Connect que nous avons élaboré dans le cadre du modul
 ‌
 ‌
 ‌
+7. </div>
