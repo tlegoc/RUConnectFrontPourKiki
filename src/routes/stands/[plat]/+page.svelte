@@ -9,12 +9,21 @@
     let plat = "";
 
     onMount(async () => {
-        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/strasbourg`);
+        // //console.log(data);
+        var res = await fetch(`https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/`+data.nom_plat);
         res = await res.text();
-        const cdataContent = res.match(/<!\[CDATA\[(.*?)\]\]>/s)[1];
         var domParser = new DOMParser();
-        var doc = domParser.parseFromString(cdataContent, 'text/html');
-            // Initialize titlesStand array with empty arrays
+        var menu = domParser.parseFromString(res, 'text/html');
+
+        // Parsing the right restaurant and date in the XML file
+        var menuToText = menu.querySelector(`resto[id="${id}"]`).querySelector(`menu[date="${date}"]`).innerHTML;
+        
+        // Cleaning the text
+        menuToText = menuToText.substring(12, menuToText.length - 8);
+        menuToText = menuToText.replace(/<h2-->/g, '<h2>');
+        var doc = domParser.parseFromString(menuToText, 'text/html');
+        
+        // Initialize titlesStand array with empty arrays
         for (let i = 0; i < doc.getElementsByTagName('h2').length; i++) {
             titlesStand.push([]);
         }
@@ -36,9 +45,9 @@
                     titlesStand[i][j] = nextNode.innerHTML;  
                     j++;
                     nextNodeMeal = nextNode.nextSibling;
-                    //console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
+                    ////console.log(Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML));
                     mealNames[i][j] = Array.from(nextNodeMeal.getElementsByTagName("li")).map(item => item.innerHTML).join(" ");
-                    console.log(mealNames[i][j]);
+                    //console.log(mealNames[i][j]);
                 }
                 nextNode = nextNode.nextSibling;
             }
@@ -48,8 +57,7 @@
         
         plat = doc.getElementsByTagName('ul')[0].getElementsByTagName('li')[0].innerHTML;
     });
-    
-    let menu = "";
+
 </script>
 
 

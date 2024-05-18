@@ -15,6 +15,7 @@
     let password = "";
     let loading = null;
     let cantConnect = null;
+
     const validatePseudo =(e)=> {
         //Contient que des lettres, chiffres, tirets et underscores
         var valid = e.target.value.match(/^[a-zA-Z0-9-_]+$/);
