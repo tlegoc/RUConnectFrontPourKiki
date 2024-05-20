@@ -111,10 +111,19 @@ Positionnement : RU-Connect se démarque en offrant des fonctionnalités de pers
 
 ## Statut du projet
 
-A FAIRE THEO
+### Fonctionnalités manquantes
 
-- Les fonctionnalités qui ne marchent pas : Swipe & Taste, l'affluence au RU
-- Possibilités d'améliorations
+Toutes les fonctionnalités que nous avions envisagées pour le produit final n'ont malheureuseument pas pu être finalisées. 
+- La fonction de swipe pour savoir si un plat nous plait ou non n'est présente que dans le backend.
+- Le système de file d'attente a été partiellement implémentée dans le frontend.
+
+### Améliorations
+
+En premier lieu nous aimerions pouvoir ajouter les dernières fonctions manquantes citées précédemment. Nous avons cependant pensé à quelques ajouts qui pourraient rendre l'application plus intéressante :
+- Système de recommandation de plat/restaurant basé sur les goûts de l'utilisateur
+- Encourager les groupes à manger ensemble en utilisant le sytème d'amis
+
+De plus le code du backend peut être grandement optimisé en utilisant plus de fonctionnalités présentes sur AWS. Le frontend possède aussi quelques bugs que nous aurions aimé régler, tout en améliorant l'interface et l'expérience utilisateur.
 
 ## Analyse critique
 
