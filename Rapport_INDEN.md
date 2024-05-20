@@ -28,15 +28,6 @@ Nous avons aussi cherché d’autres applications qui pourraient présenter des 
 
 ## Ambition
 
-### 📐 Intéractions extérieures et architecture interne :
-
-A FAIRE THEO
-
-- Structure du back (AWS)
-- Structure du front (routes)
-- Requêtage
-- Sécurité
-
 ### 💻 Les fonctionnalitées :
 - Créer un compte et pouvoir se connecter
 - Swipe&Taste : L’utilisateur va faire face à plusieurs ingrédients et va devoir cliquer soit à gauche s’il les apprécie soit à droite dans le cas contraire.
@@ -45,6 +36,29 @@ A FAIRE THEO
 - Choisir si l'on veut le menu d'aujourd'hui, de demain ou d'après-demain.
 - Accéder à son profil et mettre à jour ses informations (changement de nom et état dans la queue).
 - /*Accéder aux états dans la queue des amis.*/
+
+### 📐 Intéractions extérieures et architecture interne :
+
+#### Backend
+
+Le backend est réalisé avec AWS, et est disponible sur https://github.com/tlegoc/RUConnectBackPourKiki. Tout est séparé du frontend afin de pouvoir facilement modifier le front en cas de réécriture, mais aussi en cas de mise à jour du système. Nous utilisons les services d'Amazon pour déployer de façon optimale notre code serveur. Le back s'occupe :
+- De gérer les utilisateurs (mot de passe, amis, likes)
+- De lier les sources de données (datagouv) avec le front
+- D'implémenter les fonctionnalités comme le swipe, la file d'attente
+
+Pour déployer le code sur AWS, nous utilisons des lambdas, c'est à dire des scripts qui sont éxecutés sur requête. Ces lambdas éxecutent la logique du serveur et communiquent avec les données, hébergées elles aussi chez AWS via Cognito (utilisaeurs), DynamoDB (Base de donnée) et S3 (stockage).
+
+#### Frontend
+
+Le frontend est un site réalisé en Svelte et hébergé sur AWS Amplify. Le site est compilé en simple page html qui va ensuite communiquer avec le backend via des requêtes (voir partie suivante). Le code du front n'effectue pas de logique, et sert juste d'interface avec le backend.
+
+#### Communication front/back
+
+Pour lier les fonctions (lambdas) du backend avec le frontend, nous utilisons un service d'amazon nommé API Gateway qui nous permet de rendre accessible nos fonctions via des requêtes HTTP (vous pouvez par exemple récupérer la liste des menus sur [cette adressse](https://qx68e2c3ei.execute-api.eu-west-1.amazonaws.com/prod/datagouv/strasbourg)). Ainsi le back n'a pas besoin de connaître le fonctionnement du front, et est totalement distinct. Il serait possible par exemple de coder une seconde application sans empécher le fonctionnement de la première.
+
+#### Sécurité
+
+Pour stocker les données sensibles des utilisateurs, nous utilisons AWS Cognito, un service d'authentification créé par Amazon. Ce service gère automatiquement l'encryption des mots de passe, la création de compte et l'authentification. Dans le front, nous utilisons le code officiel d'Amazon pour se connecter et ainsi s'assurer qu'aucun mot de passe ne peut être récupéré.
 
 ### Les pages et composants de l'application
 
