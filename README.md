@@ -1,5 +1,5 @@
 <h1 align="center">RU Connect</h1>
-<h4 align="center">Ariane Nicolas - Kilian Marcelin - Rémi Cazoulat - Axel Allain</h4>
+<h4 align="center">Ariane Nicolas - Kilian Marcelin - Rémi Cazoulat - Axel Allain - Théo Le Goc</h4>
 
 ---
 <div style='text-align: justify;'>
